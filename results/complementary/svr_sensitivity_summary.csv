@@ -1,0 +1,3 @@
+analysis,MAE_days,RMSE_days,R2
+Primary frozen NB03 SVR,2.194627734359565,2.716170872669306,0.8167059823717481
+Complementary wider-grid sensitivity SVR,2.212318,2.735211,0.814127
