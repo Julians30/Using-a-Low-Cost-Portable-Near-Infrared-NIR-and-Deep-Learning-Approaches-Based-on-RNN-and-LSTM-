@@ -1,0 +1,4 @@
+model,predicted_on_observed_slope,intercept_days,line_R2,slope_bootstrap95_low,slope_bootstrap95_high,bootstrap_resamples,bootstrap_unit
+SVR,0.854599,1.674598,0.818813,0.824557,0.884720,10000,egg
+PLSR,0.845429,1.629185,0.798959,0.819710,0.871395,10000,egg
+ANN,0.822630,1.703682,0.782881,0.787722,0.860033,10000,egg
