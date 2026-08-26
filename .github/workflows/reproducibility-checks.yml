@@ -2,7 +2,7 @@ name: Reproducibility checks
 
 on:
   push:
-    branches: [main, reproducibility-rebuild]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -19,13 +19,14 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install lightweight test dependencies
-        run: pip install -r requirements-ci.txt
+      - name: Install reproducibility package and test dependencies
+        run: pip install -e '.[test]'
 
       - name: Run core reproducibility tests
-        env:
-          PYTHONPATH: src
-        run: pytest -q
+        run: pytest
+
+      - name: Run installed split-verification command
+        run: nir-eggs-verify-splits
 
       - name: Validate frozen split files against manifest
         run: |
