@@ -1,0 +1,46 @@
+{
+  "schema": "NIR-HUEVOS reproducibility snapshot v1.0",
+  "snapshot_status": "pre-archival; computational results frozen",
+  "base_main_commit_before_archival_metadata": "8eed70adf4f1ed323e150645b2aeb269ee2ea2e3",
+  "target_manuscript": "Foods (MDPI)",
+  "manuscript_title": "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep-Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures",
+  "frozen_hashes": {
+    "dataset_sha256": "cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e",
+    "split_manifest_sha256": "fbeb8fa19d522cd91bee875bf5731cda264475da27bc7e93c25ca0d6f0f33717",
+    "NB01_clean_source_sha256": "61ea81357dd11845829f4f043d36b40f458ac60a29253f33bb38e70db9aa924f",
+    "NB02_clean_source_sha256": "a6369e024d81b83af912a4757b0718d15eaa4fefda6f6983296d92963af5f944",
+    "NB03_clean_source_sha256": "c4a2518a0fe1dd8ba071019998b4717a40ed5a7a81b56423a3df0c471d8bca02",
+    "NB04_clean_source_sha256": "6301cfe4cf087cf2ab1028f482124c95c7612d70581a2225ac18242beb438d4c",
+    "NB05_clean_source_sha256": "76953b9a2e0175b1f56c38a0966fb81ed44dca6b7bea729ebaec8f6f65631906",
+    "NB06_clean_source_sha256": "54158e1b2e285968241ccf6b4dd8dd84d7ff557df4f140308a871a3fa4953aea",
+    "NB07_clean_source_sha256": "5ec3c0a185195d68be7539256ff9f44bfacad001a56f5775d538b30e238566c1",
+    "NB08_clean_source_sha256": "4da89611c473e85f2a89538c8b149148b5bd3f279ec234a290423ef7d75559b0"
+  },
+  "pipeline_status": {
+    "NB01_DATA_AUDIT": "frozen",
+    "NB02_FROZEN_GROUP_SPLITS": "frozen",
+    "NB03_CHEMOMETRIC_BASELINES": "frozen",
+    "NB04_DEEP_LEARNING_BENCHMARK": "frozen",
+    "NB05_WAVELENGTH_ORDER_ABLATION": "frozen",
+    "NB06_STATISTICAL_ROBUSTNESS": "frozen",
+    "NB07_PRACTICAL_APPLICABILITY": "frozen",
+    "NB08_PUBLICATION_FIGURES_TABLES": "scientifically frozen; editorial assets may be reformatted without changing values"
+  },
+  "primary_scientific_guardrails": {
+    "independent_biological_unit": "egg",
+    "n_independent_eggs": 30,
+    "n_repeated_spectra": 660,
+    "performance_source": "egg-disjoint outer-fold OOF predictions",
+    "outer_test_used_for_tuning": false,
+    "deep_learning_seeds_are_biological_replicates": false,
+    "equivalence_claim_from_non_significance": false,
+    "external_validation_completed": false
+  },
+  "archival_blockers": [
+    "authoritative raw-data source and redistribution terms not yet documented",
+    "final repository name not yet selected",
+    "software license not yet explicitly selected by authors",
+    "cleaned NB01-NB08 notebook files not yet committed to GitHub; hashes are documented",
+    "final archival DOI/release does not yet exist"
+  ]
+}
