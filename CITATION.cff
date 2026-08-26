@@ -3,7 +3,6 @@ message: "If you use this repository, please cite the associated manuscript and 
 title: "Leakage-Safe NIR Egg Storage-Time Prediction"
 type: software
 version: 0.1.0
-date-released: 2026-08-25
 url: "https://github.com/Julians30/Using-a-Low-Cost-Portable-Near-Infrared-NIR-and-Deep-Learning-Approaches-Based-on-RNN-and-LSTM-"
 authors:
   - family-names: Coronel-Reyes
@@ -35,4 +34,4 @@ preferred-citation:
     - family-names: Carvajal-Romero
       given-names: Héctor Ramiro
   year: 2026
-  notes: "Manuscript prepared for submission; journal/DOI metadata will be updated after acceptance or archival release."
+  notes: "Manuscript prepared for submission; journal/DOI metadata and repository release date will be updated after acceptance or archival release."
