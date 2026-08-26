@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Raw or local data
+*.xlsx
+*.xls
+*.parquet
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+/data/raw/
+/data/private/
+
+# Trained model binaries / temporary checkpoints
+*.keras
+*.h5
+*.joblib
+*.ckpt
+/checkpoints/
+
+# Temporary packaging and logs
+_PACKAGE_TMP/
+*.log
+*.tmp
+
+# Manuscript working files
+*.docx
+*.pdf
+~$*
