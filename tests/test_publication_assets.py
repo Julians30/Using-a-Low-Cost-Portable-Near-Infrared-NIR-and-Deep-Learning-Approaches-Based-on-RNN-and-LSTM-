@@ -43,3 +43,43 @@ def test_practical_latency_is_labeled_as_cpu_reference_data():
     assert t.loc["ANN", "CPU latency (ms/spectrum)"] < t.loc["SimpleRNN", "CPU latency (ms/spectrum)"]
     assert t.loc["SimpleRNN", "CPU latency (ms/spectrum)"] < t.loc["LSTM", "CPU latency (ms/spectrum)"]
     assert t.loc["LSTM", "CPU latency (ms/spectrum)"] < t.loc["BiLSTM", "CPU latency (ms/spectrum)"]
+
+
+def test_row_level_diagnostic_has_complete_egg_overlap_and_modest_optimism():
+    audit = pd.read_csv("results/complementary/row_level_overlap_audit.csv")
+    assert len(audit) == 5
+    assert (audit["n_overlapping_eggs"] == 30).all()
+    assert np.allclose(audit["overlap_fraction_test_eggs"], 1.0)
+
+    comp = pd.read_csv("results/complementary/row_level_vs_eggdisjoint.csv").set_index("model")
+    for model in ["SVR", "PLSR", "ANN"]:
+        assert comp.loc[model, "MAE_days_rowlevel"] < comp.loc[model, "MAE_days_eggdisjoint"]
+        assert comp.loc[model, "R2_rowlevel"] > comp.loc[model, "R2_eggdisjoint"]
+    assert 5.0 < comp.loc["ANN", "MAE_relative_reduction_pct"] < 8.0
+    assert 5.0 < comp.loc["SVR", "MAE_relative_reduction_pct"] < 8.0
+    assert 5.0 < comp.loc["PLSR", "MAE_relative_reduction_pct"] < 8.0
+
+
+def test_svr_sensitivity_does_not_replace_or_improve_primary_result():
+    s = pd.read_csv("results/complementary/svr_sensitivity_summary.csv").set_index("analysis")
+    primary = s.loc["Primary frozen NB03 SVR"]
+    sens = s.loc["Complementary wider-grid sensitivity SVR"]
+    assert sens["MAE_days"] > primary["MAE_days"]
+    assert sens["R2"] < primary["R2"]
+
+
+def test_storage_phase_and_attenuation_outputs_match_manuscript_guardrails():
+    phase = pd.read_csv("results/complementary/storage_phase_classification_summary.csv").set_index("model")
+    assert np.isclose(phase.loc["SVR", "accuracy"], 0.786364, atol=1e-6)
+    assert np.isclose(phase.loc["SVR", "macro_F1"], 0.788418, atol=1e-6)
+    assert np.isclose(phase.loc["SVR", "cohen_kappa"], 0.680107, atol=1e-6)
+
+    per_class = pd.read_csv("results/complementary/storage_phase_per_class_metrics.csv")
+    assert not per_class["F1"].isna().any()
+    srnn_late = per_class[(per_class.model == "SimpleRNN") & (per_class.storage_phase == "Late (15–21)")].iloc[0]
+    assert srnn_late["F1"] == 0.0
+
+    slopes = pd.read_csv("results/complementary/predicted_on_observed_attenuation_slopes.csv").set_index("model")
+    for model in ["SVR", "PLSR", "ANN"]:
+        assert slopes.loc[model, "predicted_on_observed_slope"] < 1.0
+        assert slopes.loc[model, "slope_bootstrap95_high"] < 1.0

@@ -1,0 +1,6 @@
+row_fold,n_train_rows,n_test_rows,n_train_eggs,n_test_eggs,n_overlapping_eggs,overlap_fraction_test_eggs
+1,528,132,30,30,30,1.0
+2,528,132,30,30,30,1.0
+3,528,132,30,30,30,1.0
+4,528,132,30,30,30,1.0
+5,528,132,30,30,30,1.0
