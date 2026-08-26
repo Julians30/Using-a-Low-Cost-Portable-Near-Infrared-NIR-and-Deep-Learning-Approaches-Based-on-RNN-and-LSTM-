@@ -8,7 +8,7 @@ This document defines the execution contract for reproducing the computational a
 
 **The egg is the independent biological unit.**
 
-The dataset contains 660 spectra, but these are repeated observations from 30 eggs measured over 22 storage days. Any validation that randomly splits rows can place repeated measurements from the same egg in both training and test sets. The manuscript therefore uses frozen egg-disjoint partitions throughout.
+The dataset contains 660 spectra, but these are repeated observations from 30 eggs measured over 22 storage days. Any validation that randomly splits rows can place repeated measurements from the same egg in both training and test sets. The primary manuscript therefore uses frozen egg-disjoint partitions throughout.
 
 ## Expected data layout
 
@@ -35,9 +35,9 @@ The manuscript reconstruction uses the following integrity anchors:
 
 A reproduction should fail loudly if these hashes do not match the frozen release inputs.
 
-## Execution order
+## Frozen primary execution order
 
-Run the notebooks in this exact order:
+Run the primary notebooks in this exact order:
 
 1. `NB01_DATA_AUDIT.ipynb`
 2. `NB02_FROZEN_GROUP_SPLITS.ipynb`
@@ -48,7 +48,7 @@ Run the notebooks in this exact order:
 7. `NB07_PRACTICAL_APPLICABILITY.ipynb`
 8. `NB08_PUBLICATION_FIGURES_TABLES.ipynb`
 
-Do not skip ahead by regenerating inputs independently. Later notebooks consume frozen outputs produced by earlier stages.
+Do not skip ahead by regenerating inputs independently. Later primary notebooks consume frozen outputs produced by earlier stages.
 
 ## Validation design
 
@@ -156,19 +156,30 @@ NB07 uses frozen OOF predictions for all predictive-performance summaries. Full-
 
 Operational clipping to `[0, 21]` is secondary sensitivity analysis only. Primary performance metrics remain unclipped.
 
+## Complementary post-freeze analyses
+
+After NB01–NB08 and the primary OOF estimates were frozen, the manuscript added four supporting analyses. These do not reopen or replace primary model selection.
+
+1. **Row-level partition diagnostic.** Five shuffled row-level folds intentionally ignore egg identity. The audit confirms all 30 eggs appear in both training and test sets in every fold. Fixed representative configurations derived from the already-frozen selections are used so that the comparison isolates partitioning rather than additional tuning.
+2. **Wider-grid SVR sensitivity.** The original egg-disjoint outer/inner folds are retained; preprocessing is fixed to the SG first derivative and only `C`, `epsilon`, and `gamma` are widened. The result is supporting stability evidence only.
+3. **Chronological storage-age phases.** Valid continuous egg-disjoint OOF predictions are mapped to Early (0–7 d), Middle (8–14 d), and Late (15–21 d) using thresholds 7.5 and 14.5. These are not freshness or safety classes.
+4. **Prediction attenuation.** For SVR, PLSR, and ANN, predicted storage time is regressed on observed storage time and the slope is bootstrapped by resampling whole eggs 10,000 times.
+
+Public compact outputs are under `results/complementary/`. The source notebooks for these complementary analyses are supplied with the manuscript submission package and are deliberately kept conceptually separate from the frozen primary workflow.
+
 ## Publication outputs
 
-NB08 generates publication figures and tables without retraining or selecting models. Figure captions are external to image files. The final figure package uses PNG/TIFF high-resolution outputs.
+NB08 generated the original publication tables/figures from frozen primary outputs without retraining. Final revised figure artwork was regenerated without model retraining after the complementary numerical outputs had been frozen. Figure captions matching the submission version are in `figures/publication/FIGURE_CAPTIONS.md`, and final table numbering is documented in `tables/publication/README.md`.
 
 ## Reproduction checklist
 
-A valid reproduction should confirm all of the following:
+A valid primary reproduction should confirm all of the following:
 
 - 30 unique eggs
 - 22 storage days
 - 660 spectra
 - 331 wavelength variables
-- zero egg overlap between train/test folds
+- zero egg overlap between valid outer train/test folds
 - identical outer-fold mapping across NB03/NB04/NB05
 - 1,980 NB03 OOF rows
 - 7,920 NB04 seed-wise OOF rows
@@ -177,6 +188,14 @@ A valid reproduction should confirm all of the following:
 - completed NB07 practical package
 - publication-only NB08 with no model retraining
 
+A valid audit of the complementary manuscript outputs should additionally confirm:
+
+- five row-level folds with 30/30 overlapping eggs
+- lower row-level MAE for SVR, PLSR, and ANN than under egg-disjoint evaluation
+- wider-grid SVR MAE does not improve on the frozen primary SVR MAE
+- SVR storage-age phase accuracy ≈ 0.786 and macro-F1 ≈ 0.788
+- predicted-on-observed upper 95% slope bounds remain below 1 for SVR, PLSR, and ANN
+
 ## Reproducibility boundary
 
-This workflow evaluates generalization to unseen eggs **within the same acquisition campaign**. It is not external validation across farms, instruments, breeds, seasons, batches or environmental regimes. Such validation is required before deployment claims.
+This workflow evaluates generalization to unseen eggs **within the same acquisition campaign**. It is not external validation across farms, instruments, breeds, seasons, batches, temperatures, humidity regimes, or other acquisition domains. Such validation is required before deployment claims.
