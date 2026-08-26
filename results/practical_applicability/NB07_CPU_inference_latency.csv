@@ -1,0 +1,13 @@
+model,device,batch_size,repeats,warmup_repeats,benchmark_type,model_only_median_ms_per_spectrum,model_only_p95_ms_per_spectrum,end_to_end_median_ms_per_spectrum,end_to_end_p95_ms_per_spectrum,end_to_end_throughput_spectra_per_second
+SVR,CPU,1,200,20,fitted final engineering model on all data; no performance estimate,0.455099999982167,0.5638286499930684,1.3364709999734714,1.7823155000257866,748.2392061031251
+SVR,CPU,32,60,20,fitted final engineering model on all data; no performance estimate,0.15200637500001335,0.21201330468691992,0.20964904687481578,0.2644579624997867,4769.87620457494
+PLSR,CPU,1,200,20,fitted final engineering model on all data; no performance estimate,0.20366750001699074,0.28395095000064424,0.5145555000183322,0.7278513500352797,1943.42495603365
+PLSR,CPU,32,60,20,fitted final engineering model on all data; no performance estimate,0.007589781250594285,0.008570442187405547,0.021242218749328856,0.023563801562076492,47076.061677012665
+ANN,CPU,1,200,20,frozen architecture forward-pass; weights not used for performance,5.763343500007068,8.154433450025063,7.405335500010324,10.522830199994356,135.03777107716536
+ANN,CPU,32,60,20,frozen architecture forward-pass; weights not used for performance,0.1502607499990205,0.18428304999922313,0.19707757812437166,0.24570319218693012,5074.14394634442
+BiLSTM,CPU,1,200,20,frozen architecture forward-pass; weights not used for performance,2356.2237265000476,3352.432028899835,2382.955389000017,3418.463319699947,0.4196469663746579
+BiLSTM,CPU,32,60,20,frozen architecture forward-pass; weights not used for performance,70.5470003125015,105.06431726093695,71.63142942187051,97.0941452624988,13.960352432876064
+LSTM,CPU,1,200,20,frozen architecture forward-pass; weights not used for performance,1127.1915304998856,1690.9010978498827,1120.4614039999115,1695.4471235498881,0.8924894658844305
+LSTM,CPU,32,60,20,frozen architecture forward-pass; weights not used for performance,34.933647031252235,52.975775606262935,34.41169692187174,51.38071587499908,29.059886301753686
+SimpleRNN,CPU,1,200,20,frozen architecture forward-pass; weights not used for performance,691.4487120002377,1082.8153540501262,689.500242000122,1046.5690236495902,1.4503258143886528
+SimpleRNN,CPU,32,60,20,frozen architecture forward-pass; weights not used for performance,22.05794307813136,34.22860115624857,22.162184656245643,34.83445798906146,45.121905421818816
