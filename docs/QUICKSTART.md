@@ -20,7 +20,7 @@ python -m pip install --upgrade pip
 pip install -e '.[test]'
 ```
 
-For the complete deep-learning/notebook environment:
+For the complete deep-learning/core-notebook environment:
 
 ```bash
 pip install -e '.[full]'
@@ -45,7 +45,7 @@ A valid result confirms:
 
 ## 4. Audit the raw dataset
 
-Place the exact study CSV at a local path and run:
+Obtain the study dataset from Mendeley Data (Version 2, DOI `10.17632/6hn67h2trb.2`), place the exact CSV at a local path, and run:
 
 ```bash
 nir-eggs-audit-data --data /path/to/dataset_egg_storage_RAW.csv
@@ -67,28 +67,39 @@ pytest
 
 These tests verify the core metrics/statistics, train-fitted preprocessing behavior, frozen model grids, frozen network-capacity constants, wavelength-order ablation logic, split integrity, and selected publication-table values.
 
-## 6. Full analysis order
+## 6. Frozen primary analysis order
 
-The scientific execution order is:
+The primary scientific execution order is:
 
 ```text
 NB01 → NB02 → NB03 → NB04 → NB05 → NB06 → NB07 → NB08
 ```
 
-The deep-learning stages are computationally expensive and were originally executed in Google Colab Pro. Reproducing the exact manuscript claims requires preserving the frozen partitions, seeds and training-only selection boundaries documented in `protocol/frozen_protocol.json` and `docs/ANALYSIS_PROTOCOL.md`.
+The deep-learning stages are computationally expensive and were originally executed in Google Colab Pro. Reproducing the primary manuscript claims requires preserving the frozen partitions, seeds and training-only selection boundaries documented in `protocol/frozen_protocol.json` and `docs/ANALYSIS_PROTOCOL.md`.
 
-## 7. Verify manuscript values without retraining
+## 7. Verify final manuscript values without retraining
 
-The frozen publication values are under:
+The numerical sources for the final manuscript are under:
 
 ```text
 tables/publication/
 results/statistical_robustness/
 results/practical_applicability/
+results/complementary/
 ```
 
-For example, Table 3 records the pooled OOF point estimates and Table 4/4B records the egg-level statistical interpretation. These frozen outputs are the source for the manuscript, not the legacy notebook.
+The final manuscript numbering is documented in `tables/publication/README.md` and `docs/MANUSCRIPT_REPOSITORY_MAPPING.md`.
+
+Key complementary checks that can be verified directly from CSV files are:
+
+- all 30 eggs overlap between training and test in every random row-level fold;
+- row-level MAE is 5.1–7.2% lower for SVR/PLSR/ANN than under valid egg-disjoint evaluation;
+- the wider-grid SVR sensitivity analysis does not improve the frozen primary SVR estimate;
+- SVR chronological storage-age phase accuracy is 78.6%, with macro-F1 0.788 and Cohen's κ 0.680;
+- predicted-on-observed slopes for SVR, PLSR and ANN are below 1 with whole-egg bootstrap intervals below 1.
+
+The complementary source notebooks are supplied with the manuscript submission package; their public CSV outputs are kept separate from the frozen NB01–NB08 core so that sensitivity analyses are not mistaken for primary model selection.
 
 ## Reproducibility boundary
 
-The study evaluates unseen eggs within one acquisition campaign. It does not constitute external validation across farms, instruments, batches, breeds, seasons or environmental regimes.
+The study evaluates unseen eggs within one acquisition campaign. It does not constitute external validation across farms, instruments, batches, breeds, seasons, temperatures, humidity regimes, or other acquisition domains. Early/Middle/Late outputs are chronological storage-age phases and must not be interpreted as independently validated freshness or safety classes.
