@@ -1,0 +1,8 @@
+Model,Family,Modeling strategy,Role
+DummyMean,Naive reference,Mean storage day of training data,Secondary benchmark
+PLSR,Chemometric regression,Nested group-disjoint selection of preprocessing and latent components,Primary comparator
+SVR,Kernel machine,RBF SVR with nested group-disjoint hyperparameter selection,Primary comparator
+ANN,Feed-forward neural network,Compact fixed-capacity ANN; preprocessing and epoch budget selected inner-CV,Deep-learning comparator
+SimpleRNN,Recurrent neural network,331×1 wavelength sequence; fixed architecture,Recurrent comparator
+LSTM,Long short-term memory,331×1 wavelength sequence; fixed architecture,Recurrent comparator
+BiLSTM,Bidirectional LSTM,331×1 wavelength sequence; fixed architecture,Recurrent comparator

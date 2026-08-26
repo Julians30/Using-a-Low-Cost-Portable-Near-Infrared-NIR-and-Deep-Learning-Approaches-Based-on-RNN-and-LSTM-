@@ -1,0 +1,63 @@
+{
+  "project": "NIR_HUEVOS_PAPER_REBUILD_2026",
+  "manuscript_title": "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep-Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures",
+  "dataset": {
+    "rows": 660,
+    "independent_eggs": 30,
+    "storage_days": 22,
+    "day_range": [0, 21],
+    "spectral_variables": 331,
+    "wavelength_range_nm": [740, 1070],
+    "dataset_sha256": "cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e"
+  },
+  "validation": {
+    "group_column": "sample",
+    "target_column": "storage_days",
+    "outer_folds": 5,
+    "outer_seed": 2026,
+    "outer_train_eggs": 24,
+    "outer_test_eggs": 6,
+    "inner_folds": 4,
+    "inner_train_eggs": 18,
+    "inner_validation_eggs": 6,
+    "split_manifest_sha256": "fbeb8fa19d522cd91bee875bf5731cda264475da27bc7e93c25ca0d6f0f33717",
+    "outer_test_used_for_selection": false
+  },
+  "preprocessing_candidates": ["raw", "snv", "msc", "sg_smooth", "sg_deriv1"],
+  "deep_learning": {
+    "models": ["ANN", "SimpleRNN", "LSTM", "BiLSTM"],
+    "seeds": [2026, 2027, 2028],
+    "ANN_hidden_units": [64, 32],
+    "recurrent_units": 64,
+    "dense_after_recurrent": 32,
+    "dropout": 0.20,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "loss": "mse",
+    "batch_size": 32,
+    "max_epochs": 300,
+    "early_stopping_patience": 20,
+    "early_stopping_min_delta": 0.001,
+    "recurrent_axis": "ordered wavelengths; not storage time"
+  },
+  "wavelength_order_ablation": {
+    "conditions": ["original", "reversed", "shuffled"],
+    "shuffle_seed": 52026,
+    "retuning_after_reordering": false,
+    "preprocessing_before_reordering": true
+  },
+  "statistics": {
+    "primary_inferential_unit": "egg",
+    "primary_outcome": "per-egg MAE across 22 days",
+    "global_test": "Friedman",
+    "global_effect": "Kendall W",
+    "pairwise_test": "paired Wilcoxon signed-rank",
+    "multiplicity": "Holm",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 62026,
+    "equivalence_claim_from_nonsignificance": false
+  },
+  "primary_performance_predictions_clipped": false,
+  "practical_clipping_sensitivity_range_days": [0, 21],
+  "external_validation": false
+}
