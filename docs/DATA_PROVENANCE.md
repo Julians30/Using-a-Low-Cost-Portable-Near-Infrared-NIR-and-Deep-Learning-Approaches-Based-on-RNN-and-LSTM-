@@ -2,7 +2,7 @@
 
 ## Frozen analytical dataset
 
-The reconstructed analysis uses one exact CSV file identified by SHA-256:
+The reconstructed analysis uses one exact local CSV identified by SHA-256:
 
 ```text
 cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e
@@ -14,49 +14,44 @@ Expected structure:
 - 30 shell eggs (`sample`)
 - 22 repeated storage days per egg (`storage_days`, 0–21)
 - 331 spectral variables (`Spectra_740` through `Spectra_1070`)
-- portable miniaturized SCiO NIR acquisition
+- portable miniaturized SCiO NIR acquisition over 740–1070 nm
 
 This hash, rather than a file name alone, defines the computational input used for the frozen analyses.
 
-## Scientific acquisition provenance
+## Authoritative public source
 
-The analytical dataset is scientifically consistent with the experiment reported by Coronel-Reyes et al. (2018), *Determination of egg storage time at room temperature using a low-cost NIR spectrometer and machine learning techniques*, **Computers and Electronics in Agriculture**, 145, 1–10, DOI: `10.1016/j.compag.2017.12.030`.
+The manuscript cites the following public dataset as the source of the analyzed spectra:
 
-That publication reports daily low-cost smartphone-connected NIR measurements over 22 days at room temperature (23 ± 1 °C), a 740–1070 nm spectral range, and a resulting dataset of 660 observations. These experimental characteristics match the frozen dataset used in the present reconstruction.
+Ramírez-Morales, I. (2019). *NIR spectra of poultry eggs at different storage days ranging from 0 to 21.* Mendeley Data, Version 2. DOI: `10.17632/6hn67h2trb.2`.
 
-This establishes the **scientific provenance of the acquisition campaign**, but it does **not by itself establish the redistribution license of the exact CSV file** identified by the SHA-256 above.
+The Mendeley Data record describes 660 spectral curves from 30 intact brown shell eggs monitored over 22 days, acquired with a handheld SCiO NIR spectrometer from 740 to 1070 nm at approximately 1 nm resolution. These characteristics match the analytical dataset documented in the manuscript and repository.
 
-## Redistribution status
+The same acquisition campaign is scientifically described in Coronel-Reyes et al. (2018), *Determination of egg storage time at room temperature using a low-cost NIR spectrometer and machine learning techniques*, **Computers and Electronics in Agriculture**, 145, 1–10, DOI: `10.1016/j.compag.2017.12.030`.
 
-The raw spectral CSV is **not currently redistributed in this repository**. Before archival release, the authors must document the authoritative file source and confirm that its license/terms permit republication of the raw spectra.
+## License and repository policy
 
-Until that verification is complete:
+Mendeley Data Version 2 states that the source dataset is released under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
 
-1. do not commit the raw CSV to this repository;
-2. do not assign a new license to the raw spectral measurements;
-3. do not imply that the repository license, once selected, automatically covers the source dataset;
-4. keep the dataset SHA-256 in all reproducibility documentation so an authorized local copy can be verified bit-for-bit.
+Although the source-data reuse terms are now documented, the raw spectral CSV is intentionally **not duplicated in this repository**. Readers should obtain the data from the authoritative Mendeley Data record and verify the local analytical copy against the frozen SHA-256 above.
 
-## What is safely redistributed here
+The source-data CC BY 4.0 license must not be conflated with the license for repository software or other derived assets. A repository software license can be selected separately before archival release.
 
-The repository does redistribute analytical metadata that do not contain the spectral measurements themselves, including:
+## What is redistributed here
+
+The repository redistributes analytical and derived materials needed for audit and reproducibility, including:
 
 - frozen outer egg assignments;
 - frozen inner egg assignments;
-- split audit tables;
-- split SHA-256 manifest;
+- split audit tables and SHA-256 manifest;
 - model/statistical protocol metadata;
-- derived aggregate publication tables and compact result summaries.
+- derived aggregate publication tables;
+- compact complementary result summaries;
+- reproducibility tests and software utilities.
 
-## Required archival action
-
-Before the public archival release or final Data Availability Statement is frozen, complete the following fields:
+## Submission-ready provenance fields
 
 - **Scientific experiment reference:** Coronel-Reyes et al. (2018), DOI `10.1016/j.compag.2017.12.030` — VERIFIED
-- **Authoritative source of the exact CSV:** TO BE VERIFIED
-- **Persistent public URL / dataset DOI for the exact CSV:** TO BE VERIFIED
-- **Original dataset license or reuse terms:** TO BE VERIFIED
-- **Whether raw-file redistribution is permitted:** TO BE VERIFIED
-- **If redistribution is not permitted, exact reader access procedure:** TO BE VERIFIED
-
-The manuscript should not state that the raw data are openly redistributed through GitHub until these remaining items are resolved.
+- **Public dataset source:** Mendeley Data Version 2 — VERIFIED
+- **Dataset DOI:** `10.17632/6hn67h2trb.2` — VERIFIED
+- **Dataset license:** CC BY 4.0 — VERIFIED
+- **Repository policy:** raw CSV not duplicated; readers obtain it from Mendeley Data and verify the frozen local SHA-256 — DOCUMENTED
