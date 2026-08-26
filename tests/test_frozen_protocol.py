@@ -1,7 +1,7 @@
 import numpy as np
 
-from src.nir_eggs.ablation import fixed_shuffled_indices, reorder_after_preprocessing
-from src.nir_eggs.models import (
+from nir_eggs.ablation import fixed_shuffled_indices, reorder_after_preprocessing
+from nir_eggs.models import (
     ANN_HIDDEN,
     BATCH_SIZE,
     DROPOUT,
@@ -14,7 +14,7 @@ from src.nir_eggs.models import (
     SVR_EPSILON_GRID,
     SVR_GAMMA_GRID,
 )
-from src.nir_eggs.splits import inner_train_validation_eggs, outer_train_test_eggs
+from nir_eggs.splits import inner_train_validation_eggs, outer_train_test_eggs
 
 
 def test_frozen_model_search_spaces():
