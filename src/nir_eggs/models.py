@@ -8,9 +8,6 @@ folds.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Iterable
-
 from sklearn.cross_decomposition import PLSRegression
 from sklearn.svm import SVR
 
@@ -38,8 +35,8 @@ LOSS = "mse"
 
 
 def build_plsr(n_components: int) -> PLSRegression:
-    """Build the PLSR estimator used in the frozen chemometric search."""
-    return PLSRegression(n_components=int(n_components), scale=False, max_iter=500)
+    """Build the PLSR estimator used in the frozen NB03 search/refit."""
+    return PLSRegression(n_components=int(n_components), scale=True, max_iter=1000)
 
 
 def build_svr(C: float, epsilon: float, gamma: float) -> SVR:
@@ -53,7 +50,6 @@ def build_deep_model(model_name: str, n_features: int = 331):
     TensorFlow is imported lazily so the lightweight statistical utilities and
     CI checks do not require TensorFlow.
     """
-    import tensorflow as tf
     from tensorflow import keras
     from tensorflow.keras import layers
 
