@@ -1,0 +1,16 @@
+Item,Specification
+Instrument,SCiO portable miniaturized NIR spectrometer
+Spectral range,740–1070 nm
+Spectral variables,331 wavelengths
+Independent biological units,30 shell eggs
+Repeated measurements,22 storage days per egg (days 0–21)
+Total spectra,660
+Outer evaluation,5 egg-disjoint folds
+Outer fold composition,24 train eggs / 6 unseen test eggs
+Inner model selection,4 egg-disjoint folds within each outer training set
+Deep-learning seeds,"2026, 2027, 2028"
+Primary performance metric,MAE (days)
+Secondary metrics,"RMSE, pooled OOF R², bias, median AE, ±1/±2/±3-day tolerance"
+Primary inferential unit,Egg
+Primary statistical test,Friedman + paired Wilcoxon signed-rank with Holm correction
+Uncertainty,"Paired egg-level bootstrap, 10,000 resamples"
