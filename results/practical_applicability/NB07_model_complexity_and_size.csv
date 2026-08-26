@@ -1,0 +1,7 @@
+model,engineering_fit_on_all_660_spectra,generalization_performance_from_this_fit_reported,representative_preprocessing,complexity_measure,complexity_value,serialized_size_MB,final_refit_seconds_CPU
+PLSR,True,False,snv,n_components,40,1.1269397735595703,0.06712911299996449
+SVR,True,False,sg_deriv1,n_support_vectors,288,0.742283821105957,0.5368305220000025
+ANN,False,False,sg_deriv1,trainable_parameters,23361,0.1134634017944336,
+SimpleRNN,False,False,sg_deriv1,trainable_parameters,6337,0.05128955841064453,
+LSTM,False,False,sg_deriv1,trainable_parameters,19009,0.09954452514648438,
+BiLSTM,False,False,sg_deriv1,trainable_parameters,37953,0.17984676361083984,
