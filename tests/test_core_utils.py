@@ -1,8 +1,8 @@
 import numpy as np
 
-from src.nir_eggs.metrics import regression_metrics
-from src.nir_eggs.preprocessing import SpectralPreprocessor
-from src.nir_eggs.statistics import holm_adjust, kendalls_w_from_friedman, paired_bootstrap_mean_difference
+from nir_eggs.metrics import regression_metrics
+from nir_eggs.preprocessing import SpectralPreprocessor
+from nir_eggs.statistics import holm_adjust, kendalls_w_from_friedman, paired_bootstrap_mean_difference
 
 
 def test_regression_metrics_perfect_prediction():
