@@ -2,7 +2,11 @@
 
 The repository originally contained a single notebook, `EggSpectrum_Analysis.ipynb`, based on the earlier analytical workflow.
 
-That notebook is retained for **provenance and transparency**, but it is not the source of the manuscript's current performance claims.
+That notebook is now preserved as:
+
+`legacy/EggSpectrum_Analysis_original.ipynb`
+
+It is retained for **provenance and transparency**, but it is not the source of the manuscript's current performance claims.
 
 ## Why it is legacy
 
@@ -19,6 +23,4 @@ The reconstructed manuscript therefore replaces the earlier evaluation with:
 - wavelength-order ablation
 - reproducibility hashes and standardized output packages
 
-The legacy notebook should be treated as historical context only.
-
-A later repository-cleanup commit will relocate the original root notebook into this directory without rewriting its contents, preserving its exact Git blob/history as far as possible.
+The legacy notebook should be treated as historical context only. It was moved using its existing Git blob rather than rewritten, so the file content itself was preserved during the repository reorganization.
