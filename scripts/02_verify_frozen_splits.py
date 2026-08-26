@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from src.nir_eggs.splits import (
+from nir_eggs.splits import (
     inner_train_validation_eggs,
     outer_train_test_eggs,
     verify_split_files,
