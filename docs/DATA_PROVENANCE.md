@@ -18,9 +18,17 @@ Expected structure:
 
 This hash, rather than a file name alone, defines the computational input used for the frozen analyses.
 
+## Scientific acquisition provenance
+
+The analytical dataset is scientifically consistent with the experiment reported by Coronel-Reyes et al. (2018), *Determination of egg storage time at room temperature using a low-cost NIR spectrometer and machine learning techniques*, **Computers and Electronics in Agriculture**, 145, 1–10, DOI: `10.1016/j.compag.2017.12.030`.
+
+That publication reports daily low-cost smartphone-connected NIR measurements over 22 days at room temperature (23 ± 1 °C), a 740–1070 nm spectral range, and a resulting dataset of 660 observations. These experimental characteristics match the frozen dataset used in the present reconstruction.
+
+This establishes the **scientific provenance of the acquisition campaign**, but it does **not by itself establish the redistribution license of the exact CSV file** identified by the SHA-256 above.
+
 ## Redistribution status
 
-The raw spectral CSV is **not currently redistributed in this repository**. Before archival release, the authors must document the authoritative data source and confirm that its license/terms permit republication of the raw spectra.
+The raw spectral CSV is **not currently redistributed in this repository**. Before archival release, the authors must document the authoritative file source and confirm that its license/terms permit republication of the raw spectra.
 
 Until that verification is complete:
 
@@ -44,10 +52,11 @@ The repository does redistribute analytical metadata that do not contain the spe
 
 Before the public archival release or final Data Availability Statement is frozen, complete the following fields:
 
-- **Authoritative dataset source:** TO BE VERIFIED
-- **Persistent public URL / DOI:** TO BE VERIFIED
+- **Scientific experiment reference:** Coronel-Reyes et al. (2018), DOI `10.1016/j.compag.2017.12.030` — VERIFIED
+- **Authoritative source of the exact CSV:** TO BE VERIFIED
+- **Persistent public URL / dataset DOI for the exact CSV:** TO BE VERIFIED
 - **Original dataset license or reuse terms:** TO BE VERIFIED
 - **Whether raw-file redistribution is permitted:** TO BE VERIFIED
 - **If redistribution is not permitted, exact reader access procedure:** TO BE VERIFIED
 
-The manuscript should not state that the raw data are openly redistributed through GitHub until these items are resolved.
+The manuscript should not state that the raw data are openly redistributed through GitHub until these remaining items are resolved.
