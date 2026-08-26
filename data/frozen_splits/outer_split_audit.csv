@@ -1,0 +1,6 @@
+outer_fold,n_train_eggs,n_test_eggs,n_train_spectra,n_test_spectra,train_day_min,train_day_max,test_day_min,test_day_max,group_overlap_count,group_overlap
+1,24,6,528,132,0,21,0,21,0,
+2,24,6,528,132,0,21,0,21,0,
+3,24,6,528,132,0,21,0,21,0,
+4,24,6,528,132,0,21,0,21,0,
+5,24,6,528,132,0,21,0,21,0,

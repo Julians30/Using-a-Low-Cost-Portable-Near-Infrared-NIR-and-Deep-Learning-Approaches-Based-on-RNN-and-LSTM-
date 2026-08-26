@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the associated manuscript and this software repository."
+title: "Leakage-Safe NIR Egg Storage-Time Prediction"
+type: software
+version: 0.1.0
+date-released: 2026-08-25
+url: "https://github.com/Julians30/Using-a-Low-Cost-Portable-Near-Infrared-NIR-and-Deep-Learning-Approaches-Based-on-RNN-and-LSTM-"
+authors:
+  - family-names: Coronel-Reyes
+    given-names: Julián
+  - family-names: Haro-Sarango
+    given-names: Alexander
+  - family-names: Vergara-Lozano
+    given-names: Vanessa
+  - family-names: Delgado-Vera
+    given-names: Carlota
+  - family-names: Quiguango Farias
+    given-names: Diego
+  - family-names: Carvajal-Romero
+    given-names: Héctor Ramiro
+preferred-citation:
+  type: article
+  title: "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep-Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures"
+  authors:
+    - family-names: Coronel-Reyes
+      given-names: Julián
+    - family-names: Haro-Sarango
+      given-names: Alexander
+    - family-names: Vergara-Lozano
+      given-names: Vanessa
+    - family-names: Delgado-Vera
+      given-names: Carlota
+    - family-names: Quiguango Farias
+      given-names: Diego
+    - family-names: Carvajal-Romero
+      given-names: Héctor Ramiro
+  year: 2026
+  notes: "Manuscript prepared for submission; journal/DOI metadata will be updated after acceptance or archival release."

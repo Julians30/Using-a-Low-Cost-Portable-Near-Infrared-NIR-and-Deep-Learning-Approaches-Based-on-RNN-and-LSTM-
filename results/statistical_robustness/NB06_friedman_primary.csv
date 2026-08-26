@@ -1,0 +1,2 @@
+analysis,n_eggs,k_models,friedman_chi2,df,p_value,kendall_W,alpha,significant
+Primary model comparison on per-egg MAE,30,6,120.19047619047626,5,2.860144314942663e-24,0.8012698412698417,0.05,True

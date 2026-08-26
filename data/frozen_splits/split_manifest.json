@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "dataset_rows": 660,
+  "dataset_eggs": 30,
+  "dataset_days": 22,
+  "group_column": "sample",
+  "target_column": "storage_days",
+  "outer_folds": 5,
+  "outer_splitter": "KFold applied to unique egg IDs",
+  "outer_shuffle": true,
+  "outer_seed": 2026,
+  "inner_folds": 4,
+  "inner_splitter": "KFold applied to unique outer-training egg IDs",
+  "inner_shuffle": true,
+  "inner_seed_rule": "12026 + outer_fold",
+  "files": {
+    "outer_group_assignment_seed2026.csv": "b981d89cb88d4263f12674805b741dc74ec07c07a166fe4a3c829b58e740858c",
+    "outer_split_audit.csv": "f21dc49d910ff76df26edba0ec71cff4b7eddef96296df0e855ad99d2f774daa",
+    "inner_group_assignment_outer01.csv": "61e36770ae100449af5a5222e035d030939be527cf486b009ecc35d1a578f510",
+    "inner_group_assignment_outer02.csv": "45626f5b9a9758da0cad6f11ecca30a3868a9683d355caa745a67c29e04cc9dc",
+    "inner_group_assignment_outer03.csv": "01a241c22a070fe5922f5cbdccfa32fedf79b65589d67d26320630e41913b0cb",
+    "inner_group_assignment_outer04.csv": "600b2c082f2438e1b7b1bf8c5536f7a4e284c27c2ff758a2041f25234033b63d",
+    "inner_group_assignment_outer05.csv": "6dd13d8074451fea768f76ecadd00908b3d682108227672dbe763028f17540b8"
+  }
+}
