@@ -6,6 +6,27 @@ Reproducibility repository for the manuscript:
 
 > Status: leakage-safe computational analysis frozen; manuscript and repository package being finalized for submission to **Foods (MDPI)**.
 
+## Quick verification
+
+With Python 3.11, a reviewer can install the lightweight reproducibility package and validate the frozen partitions without TensorFlow:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -e '.[test]'
+nir-eggs-verify-splits
+pytest
+```
+
+For the full deep-learning/notebook environment:
+
+```bash
+pip install -e '.[full]'
+```
+
+See [`docs/QUICKSTART.md`](docs/QUICKSTART.md) for the reviewer-focused execution guide.
+
 ## Study overview
 
 This repository documents a leakage-safe re-evaluation of shell-egg storage-time prediction from spectra acquired with a portable miniaturized **SCiO NIR spectrometer**. The analysis treats the **egg as the independent biological unit**, rather than the individual spectrum.
@@ -70,6 +91,7 @@ Each stage consumes frozen outputs from the preceding stages. Performance is nev
 .
 ├── README.md
 ├── CITATION.cff
+├── pyproject.toml
 ├── requirements.txt
 ├── requirements-ci.txt
 ├── environment.yml
@@ -88,7 +110,10 @@ Each stage consumes frozen outputs from the preceding stages. Performance is nev
 │   ├── splits.py
 │   ├── models.py
 │   ├── chemometric.py
-│   └── ablation.py
+│   ├── ablation.py
+│   └── cli.py
+├── protocol/
+│   └── frozen_protocol.json
 ├── results/
 │   ├── statistical_robustness/
 │   └── practical_applicability/
@@ -105,6 +130,8 @@ Each stage consumes frozen outputs from the preceding stages. Performance is nev
 ├── docs/
 │   ├── ANALYSIS_PROTOCOL.md
 │   ├── DATA_DICTIONARY.md
+│   ├── MANUSCRIPT_REPOSITORY_MAPPING.md
+│   ├── QUICKSTART.md
 │   └── REPRODUCIBILITY.md
 ├── tests/
 └── legacy/
@@ -126,11 +153,11 @@ Each stage consumes frozen outputs from the preceding stages. Performance is nev
 
 `fbeb8fa19d522cd91bee875bf5731cda264475da27bc7e93c25ca0d6f0f33717`
 
-The repository's GitHub Actions workflow verifies the split-file hashes automatically.
+The repository's GitHub Actions workflow verifies both the manifest and its split-file hashes automatically.
 
 ## Source code and notebooks
 
-The reusable source package mirrors the final preprocessing, metrics, statistical utilities, model capacity and wavelength-order ablation rules. `notebooks/notebook_source_manifest.json` records the eight cleaned source notebooks and their SHA-256 fingerprints. Cleaned notebook copies are defined as copies with output cells and execution counts removed, while scientific source and markdown are preserved.
+The reusable installable package under `src/nir_eggs/` mirrors the final preprocessing, metrics, statistical utilities, model capacity, split logic and wavelength-order ablation rules. `notebooks/notebook_source_manifest.json` records the eight cleaned source notebooks and their SHA-256 fingerprints. Cleaned notebook copies are defined as copies with output cells and execution counts removed, while scientific source and markdown are preserved.
 
 ## Statistical analysis
 
@@ -162,14 +189,16 @@ Frozen split assignments can be redistributed independently because they contain
 
 ## Automated checks
 
-GitHub Actions currently validates:
+GitHub Actions installs the project as a normal Python package and validates:
 
+- package installation and CLI availability
 - core regression/statistical utilities
 - train-only MSC behavior
-- frozen split hashes
+- exact frozen split-manifest and split-file hashes
 - outer/inner egg-disjointness and fold sizes
 - frozen search grids and neural-network capacity constants
 - deterministic wavelength-order permutation
+- frozen publication-table values and statistical interpretation guards
 
 ## Citation
 
