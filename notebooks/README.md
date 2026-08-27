@@ -1,6 +1,6 @@
 # Notebooks
 
-The reproducible pipeline is executed in the following frozen order:
+The frozen primary pipeline is executed in the following order:
 
 1. `NB01_DATA_AUDIT.ipynb`
 2. `NB02_FROZEN_GROUP_SPLITS.ipynb`
@@ -13,10 +13,28 @@ The reproducible pipeline is executed in the following frozen order:
 
 ## Public notebook format
 
-The eight public `.ipynb` files are lightweight execution notebooks. The scientific source for each stage is stored under `notebooks/src/`. Larger stages are split into ordered source fragments (`part01`, `part02`, ...); the wrapper executes those fragments sequentially in the same Python namespace. NB01 and NB02 are additionally provided as consolidated source files.
+The eight public `.ipynb` files are lightweight reviewer-facing execution wrappers. The scientific source for each primary stage is stored under `notebooks/src/`. Larger stages are split into ordered source fragments (`part01`, `part02`, ...); each wrapper executes those fragments sequentially in the same Python namespace.
 
-Stored notebook cell outputs, execution counts, user-specific Colab runtime metadata, and submission-package/export-only cells are excluded from the public execution wrappers and source fragments. The scientific analysis code, frozen validation logic, model-selection boundaries, statistical procedures, and publication-output generation are retained. Standardized frozen result files are stored separately so reported values can be audited without relying on stored notebook outputs.
+To prevent the reproducibility target from drifting as `main` evolves, every primary wrapper checks out the immutable core-source commit:
 
-**Do not regenerate the outer/inner partitions independently.** Use the frozen files in `data/frozen_splits/`.
+`bcdf89dc8f3ad3ca17068210bb8c733748e5a653`
+
+The frozen cleaned-source SHA-256 anchors are recorded in `notebook_source_manifest.json` and cross-checked by the repository tests.
+
+Stored notebook cell outputs, execution counts, user-specific Colab runtime metadata, and packaging/export-only cells are excluded from the public wrappers. The scientific analysis code, frozen validation logic, model-selection boundaries, statistical procedures, and publication-output generation are retained.
+
+## Execution environment
+
+The primary scientific notebooks were originally executed in Google Colab/Google Drive and the frozen source intentionally preserves that execution contract. A reviewer does **not** need to rerun the expensive deep-learning stages to audit the manuscript values: frozen result tables, split assignments, protocol metadata, and automated tests are included in the repository.
+
+For a lightweight platform-independent audit, follow `docs/QUICKSTART.md` and run:
+
+```bash
+pip install -e '.[test]'
+nir-eggs-verify-splits
+pytest
+```
+
+**Do not regenerate the outer/inner partitions independently.** Use the exact files in `data/frozen_splits/`.
 
 See `docs/ANALYSIS_PROTOCOL.md`, `docs/REPRODUCIBILITY.md`, and `docs/QUICKSTART.md` for the execution contract and data layout.
