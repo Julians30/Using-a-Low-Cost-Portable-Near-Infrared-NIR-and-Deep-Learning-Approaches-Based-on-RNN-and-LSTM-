@@ -11,8 +11,12 @@ The reproducible pipeline is executed in the following frozen order:
 7. `NB07_PRACTICAL_APPLICABILITY.ipynb`
 8. `NB08_PUBLICATION_FIGURES_TABLES.ipynb`
 
-The notebooks will be added as cleaned source notebooks with outputs removed where appropriate to keep the repository compact. Standardized frozen result files are retained separately so that reported values can be audited without relying on stored notebook cell outputs.
+## Public notebook format
 
-Do not regenerate the outer/inner partitions independently. Use the frozen files in `data/frozen_splits/`.
+The eight public `.ipynb` files are lightweight execution notebooks. The scientific source for each stage is stored under `notebooks/src/`. Larger stages are split into ordered source fragments (`part01`, `part02`, ...); the wrapper executes those fragments sequentially in the same Python namespace. NB01 and NB02 are additionally provided as consolidated source files.
 
-See `docs/ANALYSIS_PROTOCOL.md` and `docs/REPRODUCIBILITY.md` for the execution contract.
+Stored notebook cell outputs, execution counts, and user-specific Colab runtime metadata are excluded from the public wrappers. Stage-specific result export and packaging code is retained when it was part of the frozen scientific workflow. Standardized frozen result files are retained separately so reported values can be audited without relying on stored notebook outputs.
+
+**Do not regenerate the outer/inner partitions independently.** Use the frozen files in `data/frozen_splits/`.
+
+See `docs/ANALYSIS_PROTOCOL.md`, `docs/REPRODUCIBILITY.md`, and `docs/QUICKSTART.md` for the execution contract and data layout.
