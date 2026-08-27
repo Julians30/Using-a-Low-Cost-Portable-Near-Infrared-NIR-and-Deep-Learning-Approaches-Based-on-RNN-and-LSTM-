@@ -1,106 +1,64 @@
 {
-  "schema": "NIR-HUEVOS public notebook source manifest v2.3",
-  "note": "Public notebooks are lightweight wrappers. Scientific source is stored under notebooks/src as source-only files or ordered source fragments derived from the frozen analysis notebooks. Stored cell outputs, execution counts, user-specific Colab runtime metadata, and submission-package/export-only cells are excluded. Scientific analysis code and frozen methodological logic are retained. The clean_sha256 field preserves the original frozen cleaned-source integrity anchor documented before archival; wrapper_sha256 identifies the current lightweight public execution notebook.",
-  "execution_order": [
-    "NB01",
-    "NB02",
-    "NB03",
-    "NB04",
-    "NB05",
-    "NB06",
-    "NB07",
-    "NB08"
-  ],
+  "schema": "NIR-HUEVOS public notebook source manifest v2.4",
+  "note": "NB01-NB08 public .ipynb files are lightweight reviewer-facing execution wrappers. They checkout the immutable public_core_source_commit before executing scientific source stored under notebooks/src. Wrapper files may receive documentation or portability improvements without redefining the frozen scientific source. Stored outputs, execution counts, user-specific Colab metadata, and submission-package/export-only cells are excluded. The clean_sha256 values are the frozen cleaned-source integrity anchors documented before public archival preparation.",
+  "public_core_source_commit": "bcdf89dc8f3ad3ca17068210bb8c733748e5a653",
+  "execution_order": ["NB01", "NB02", "NB03", "NB04", "NB05", "NB06", "NB07", "NB08"],
   "notebooks": [
     {
       "stage": "NB01",
       "description": "Data audit",
       "filename": "NB01_DATA_AUDIT.ipynb",
       "clean_sha256": "61ea81357dd11845829f4f043d36b40f458ac60a29253f33bb38e70db9aa924f",
-      "source_files": [
-        "notebooks/src/NB01.py"
-      ],
-      "wrapper_sha256": "dcc6d1255aed61f37a018caca3fb3ccb1c2aea5898db10f8ba8ac937196789c4"
+      "source_files": ["notebooks/src/NB01.py"]
     },
     {
       "stage": "NB02",
       "description": "Frozen egg-disjoint group splits",
       "filename": "NB02_FROZEN_GROUP_SPLITS.ipynb",
       "clean_sha256": "a6369e024d81b83af912a4757b0718d15eaa4fefda6f6983296d92963af5f944",
-      "source_files": [
-        "notebooks/src/NB02.py"
-      ],
-      "wrapper_sha256": "b99a73b6871375c1328d70c471d2d28d1fd09519a6b4a9d4f6c9090e73215637"
+      "source_files": ["notebooks/src/NB02.py"]
     },
     {
       "stage": "NB03",
       "description": "Chemometric and machine-learning baselines",
       "filename": "NB03_CHEMOMETRIC_BASELINES.ipynb",
       "clean_sha256": "c4a2518a0fe1dd8ba071019998b4717a40ed5a7a81b56423a3df0c471d8bca02",
-      "source_files": [
-        "notebooks/src/NB03_part01.py",
-        "notebooks/src/NB03_part02.py",
-        "notebooks/src/NB03_part03.py"
-      ],
-      "wrapper_sha256": "580ebac281cfa869c379947e619ec500d74f7f85df2c976c6cd1f962cec2407f"
+      "source_files": ["notebooks/src/NB03_part01.py", "notebooks/src/NB03_part02.py", "notebooks/src/NB03_part03.py"]
     },
     {
       "stage": "NB04",
       "description": "Deep-learning benchmark",
       "filename": "NB04_DEEP_LEARNING_BENCHMARK.ipynb",
       "clean_sha256": "6301cfe4cf087cf2ab1028f482124c95c7612d70581a2225ac18242beb438d4c",
-      "source_files": [
-        "notebooks/src/NB04_part01.py",
-        "notebooks/src/NB04_part02.py",
-        "notebooks/src/NB04_part03.py"
-      ],
-      "wrapper_sha256": "e5069c57b1c18aac082e4e1e996e49f79f0e0a0b4dd14f7ba4e9a0502a213346"
+      "source_files": ["notebooks/src/NB04_part01.py", "notebooks/src/NB04_part02.py", "notebooks/src/NB04_part03.py"]
     },
     {
       "stage": "NB05",
       "description": "Wavelength-order ablation",
       "filename": "NB05_WAVELENGTH_ORDER_ABLATION.ipynb",
       "clean_sha256": "76953b9a2e0175b1f56c38a0966fb81ed44dca6b7bea729ebaec8f6f65631906",
-      "source_files": [
-        "notebooks/src/NB05_part01.py",
-        "notebooks/src/NB05_part02.py",
-        "notebooks/src/NB05_part03.py"
-      ],
-      "wrapper_sha256": "233a1ca80908812b797feddd27f4ac18dd57306b4d7b38adcde0dc6c3d8322df"
+      "source_files": ["notebooks/src/NB05_part01.py", "notebooks/src/NB05_part02.py", "notebooks/src/NB05_part03.py"]
     },
     {
       "stage": "NB06",
       "description": "Statistical robustness and model comparison",
       "filename": "NB06_STATISTICAL_ROBUSTNESS.ipynb",
       "clean_sha256": "54158e1b2e285968241ccf6b4dd8dd84d7ff557df4f140308a871a3fa4953aea",
-      "source_files": [
-        "notebooks/src/NB06_part01.py",
-        "notebooks/src/NB06_part02.py"
-      ],
-      "wrapper_sha256": "8ddd9fc2a534bd5060870e9cbd478d9b3c52b4ca7913776d931ae337863a62ea"
+      "source_files": ["notebooks/src/NB06_part01.py", "notebooks/src/NB06_part02.py"]
     },
     {
       "stage": "NB07",
       "description": "Practical applicability analyses",
       "filename": "NB07_PRACTICAL_APPLICABILITY.ipynb",
       "clean_sha256": "5ec3c0a185195d68be7539256ff9f44bfacad001a56f5775d538b30e238566c1",
-      "source_files": [
-        "notebooks/src/NB07_part01.py",
-        "notebooks/src/NB07_part02.py",
-        "notebooks/src/NB07_part03.py"
-      ],
-      "wrapper_sha256": "b98d67ed459e34c11b17eb5952867a8b66e647f73fa6387b3c78e0da527a4313"
+      "source_files": ["notebooks/src/NB07_part01.py", "notebooks/src/NB07_part02.py", "notebooks/src/NB07_part03.py"]
     },
     {
       "stage": "NB08",
       "description": "Publication figures and tables",
       "filename": "NB08_PUBLICATION_FIGURES_TABLES.ipynb",
       "clean_sha256": "4da89611c473e85f2a89538c8b149148b5bd3f279ec234a290423ef7d75559b0",
-      "source_files": [
-        "notebooks/src/NB08_part01.py",
-        "notebooks/src/NB08_part02.py"
-      ],
-      "wrapper_sha256": "5f49a3a3afee320da87c31a6f3acc905d6a38204e76cc4cab934cd0cd1f3c021"
+      "source_files": ["notebooks/src/NB08_part01.py", "notebooks/src/NB08_part02.py"]
     }
   ]
 }
