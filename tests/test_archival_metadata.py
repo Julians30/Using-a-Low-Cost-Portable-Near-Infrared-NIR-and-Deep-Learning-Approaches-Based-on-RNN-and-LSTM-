@@ -25,6 +25,34 @@ def test_snapshot_matches_frozen_manifests():
         key = f"{stage}_clean_source_sha256"
         assert snapshot["frozen_hashes"][key] == recorded[stage]
 
+    assert snapshot["public_core_source_commit"] == notebook_manifest["public_core_source_commit"]
+
+
+def test_public_notebook_wrappers_are_pinned_and_output_free():
+    manifest = json.loads(Path("notebooks/notebook_source_manifest.json").read_text())
+    pinned = manifest["public_core_source_commit"]
+
+    assert len(pinned) == 40
+    assert all(ch in "0123456789abcdef" for ch in pinned)
+
+    for item in manifest["notebooks"]:
+        path = Path("notebooks") / item["filename"]
+        assert path.exists(), f"Missing public notebook wrapper: {path}"
+        nb = json.loads(path.read_text(encoding="utf-8"))
+
+        source_text = "\n".join(
+            "".join(cell.get("source", []))
+            if isinstance(cell.get("source", []), list)
+            else str(cell.get("source", ""))
+            for cell in nb.get("cells", [])
+        )
+        assert pinned in source_text, f"{path} does not pin the frozen core commit"
+
+        for cell in nb.get("cells", []):
+            if cell.get("cell_type") == "code":
+                assert cell.get("execution_count") is None
+                assert cell.get("outputs", []) == []
+
 
 def test_snapshot_keeps_external_validation_claim_conservative():
     snapshot = json.loads(Path("protocol/reproducibility_snapshot.json").read_text())
