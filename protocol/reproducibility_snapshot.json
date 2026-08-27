@@ -1,9 +1,10 @@
 {
-  "schema": "NIR-HUEVOS reproducibility snapshot v1.0",
-  "snapshot_status": "pre-archival; computational results frozen",
+  "schema": "NIR-HUEVOS reproducibility snapshot v1.1",
+  "snapshot_status": "submission-ready; computational results frozen; archival release pending",
   "base_main_commit_before_archival_metadata": "8eed70adf4f1ed323e150645b2aeb269ee2ea2e3",
+  "public_core_source_commit": "bcdf89dc8f3ad3ca17068210bb8c733748e5a653",
   "target_manuscript": "Foods (MDPI)",
-  "manuscript_title": "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep-Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures",
+  "manuscript_title": "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures",
   "frozen_hashes": {
     "dataset_sha256": "cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e",
     "split_manifest_sha256": "fbeb8fa19d522cd91bee875bf5731cda264475da27bc7e93c25ca0d6f0f33717",
@@ -17,13 +18,13 @@
     "NB08_clean_source_sha256": "4da89611c473e85f2a89538c8b149148b5bd3f279ec234a290423ef7d75559b0"
   },
   "pipeline_status": {
-    "NB01_DATA_AUDIT": "frozen",
-    "NB02_FROZEN_GROUP_SPLITS": "frozen",
-    "NB03_CHEMOMETRIC_BASELINES": "frozen",
-    "NB04_DEEP_LEARNING_BENCHMARK": "frozen",
-    "NB05_WAVELENGTH_ORDER_ABLATION": "frozen",
-    "NB06_STATISTICAL_ROBUSTNESS": "frozen",
-    "NB07_PRACTICAL_APPLICABILITY": "frozen",
+    "NB01_DATA_AUDIT": "frozen and publicly documented",
+    "NB02_FROZEN_GROUP_SPLITS": "frozen and publicly documented",
+    "NB03_CHEMOMETRIC_BASELINES": "frozen and publicly documented",
+    "NB04_DEEP_LEARNING_BENCHMARK": "frozen and publicly documented",
+    "NB05_WAVELENGTH_ORDER_ABLATION": "frozen and publicly documented",
+    "NB06_STATISTICAL_ROBUSTNESS": "frozen and publicly documented",
+    "NB07_PRACTICAL_APPLICABILITY": "frozen and publicly documented",
     "NB08_PUBLICATION_FIGURES_TABLES": "scientifically frozen; editorial assets may be reformatted without changing values"
   },
   "primary_scientific_guardrails": {
@@ -36,11 +37,16 @@
     "equivalence_claim_from_non_significance": false,
     "external_validation_completed": false
   },
+  "resolved_items": [
+    "authoritative raw-data source documented as Mendeley Data Version 2, DOI 10.17632/6hn67h2trb.2",
+    "source-data license documented as CC BY 4.0",
+    "raw CSV intentionally not duplicated; frozen dataset SHA-256 documented",
+    "public NB01-NB08 execution notebooks and scientific source files committed to GitHub",
+    "automated split, protocol, publication-value, and archival-metadata tests passing"
+  ],
   "archival_blockers": [
-    "authoritative raw-data source and redistribution terms not yet documented",
-    "final repository name not yet selected",
-    "software license not yet explicitly selected by authors",
-    "cleaned NB01-NB08 notebook files not yet committed to GitHub; hashes are documented",
-    "final archival DOI/release does not yet exist"
-  ]
+    "software-code license not yet explicitly selected by the authors",
+    "final archival release/tag and persistent archival DOI do not yet exist"
+  ],
+  "repository_name_policy": "Do not rename the repository while the submitted manuscript cites its current URL; any future archival release should preserve a redirect or update the manuscript only if editorially possible."
 }
