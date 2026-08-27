@@ -1,14 +1,99 @@
 {
-  "schema": "NIR-HUEVOS notebook source manifest v1.0",
-  "note": "Hashes refer to source-only notebook copies with cell outputs and execution counts removed. Scientific code and markdown are preserved.",
+  "schema": "NIR-HUEVOS public notebook source manifest v2.1",
+  "note": "Public notebooks are lightweight wrappers. Scientific source is stored under notebooks/src as source-only files or ordered source fragments derived from the frozen analysis notebooks. Stored cell outputs, execution counts, and user-specific Colab runtime metadata are excluded from the public notebook wrappers. The scientific execution code is retained, including stage-specific result-export/packaging code where it was part of the frozen workflow.",
+  "execution_order": [
+    "NB01",
+    "NB02",
+    "NB03",
+    "NB04",
+    "NB05",
+    "NB06",
+    "NB07",
+    "NB08"
+  ],
   "notebooks": [
-    {"stage":"NB01","filename":"NB01_DATA_AUDIT.ipynb","clean_sha256":"61ea81357dd11845829f4f043d36b40f458ac60a29253f33bb38e70db9aa924f","drive_file_id":"1C7UwSUl-HL99FOHJvGJJ09W_utBuRUc9"},
-    {"stage":"NB02","filename":"NB02_FROZEN_GROUP_SPLITS.ipynb","clean_sha256":"a6369e024d81b83af912a4757b0718d15eaa4fefda6f6983296d92963af5f944","drive_file_id":"1qCMMyunsggdOOksneE2W8ICpjZFPVCC8"},
-    {"stage":"NB03","filename":"NB03_CHEMOMETRIC_BASELINES.ipynb","source_version":"v3 frozen","clean_sha256":"c4a2518a0fe1dd8ba071019998b4717a40ed5a7a81b56423a3df0c471d8bca02","drive_file_id":"1VZ3vo4nf3xB3mrV8a_s1b5z7v6jNM_Uh"},
-    {"stage":"NB04","filename":"NB04_DEEP_LEARNING_BENCHMARK.ipynb","clean_sha256":"6301cfe4cf087cf2ab1028f482124c95c7612d70581a2225ac18242beb438d4c","drive_file_id":"1ozE3CvycERF4JWrUG0YiukOae1FFV9tu"},
-    {"stage":"NB05","filename":"NB05_WAVELENGTH_ORDER_ABLATION.ipynb","clean_sha256":"76953b9a2e0175b1f56c38a0966fb81ed44dca6b7bea729ebaec8f6f65631906","drive_file_id":"1yYe0BeLd2YyWDJovBsK673r6R5_i1Q-M"},
-    {"stage":"NB06","filename":"NB06_STATISTICAL_ROBUSTNESS.ipynb","source_version":"corrected source-only notebook","clean_sha256":"54158e1b2e285968241ccf6b4dd8dd84d7ff557df4f140308a871a3fa4953aea","drive_file_id":"1W0LDdu8X48rHSGrNqkDpS3SP_3wkG3Kj"},
-    {"stage":"NB07","filename":"NB07_PRACTICAL_APPLICABILITY.ipynb","clean_sha256":"5ec3c0a185195d68be7539256ff9f44bfacad001a56f5775d538b30e238566c1","drive_file_id":"1oTgpbHSnDM0Zh0ybhRrLtqjmChV-awpB"},
-    {"stage":"NB08","filename":"NB08_PUBLICATION_FIGURES_TABLES.ipynb","clean_sha256":"4da89611c473e85f2a89538c8b149148b5bd3f279ec234a290423ef7d75559b0","drive_file_id":"1pDpR32idIINhTlY3Hans9c5D_lZ1V9F6"}
+    {
+      "stage": "NB01",
+      "description": "Data audit",
+      "filename": "NB01_DATA_AUDIT.ipynb",
+      "source_files": [
+        "notebooks/src/NB01.py"
+      ],
+      "wrapper_sha256": "dcc6d1255aed61f37a018caca3fb3ccb1c2aea5898db10f8ba8ac937196789c4"
+    },
+    {
+      "stage": "NB02",
+      "description": "Frozen egg-disjoint group splits",
+      "filename": "NB02_FROZEN_GROUP_SPLITS.ipynb",
+      "source_files": [
+        "notebooks/src/NB02.py"
+      ],
+      "wrapper_sha256": "b99a73b6871375c1328d70c471d2d28d1fd09519a6b4a9d4f6c9090e73215637"
+    },
+    {
+      "stage": "NB03",
+      "description": "Chemometric and machine-learning baselines",
+      "filename": "NB03_CHEMOMETRIC_BASELINES.ipynb",
+      "source_files": [
+        "notebooks/src/NB03_part01.py",
+        "notebooks/src/NB03_part02.py",
+        "notebooks/src/NB03_part03.py"
+      ],
+      "wrapper_sha256": "580ebac281cfa869c379947e619ec500d74f7f85df2c976c6cd1f962cec2407f"
+    },
+    {
+      "stage": "NB04",
+      "description": "Deep-learning benchmark",
+      "filename": "NB04_DEEP_LEARNING_BENCHMARK.ipynb",
+      "source_files": [
+        "notebooks/src/NB04_part01.py",
+        "notebooks/src/NB04_part02.py",
+        "notebooks/src/NB04_part03.py"
+      ],
+      "wrapper_sha256": "e5069c57b1c18aac082e4e1e996e49f79f0e0a0b4dd14f7ba4e9a0502a213346"
+    },
+    {
+      "stage": "NB05",
+      "description": "Wavelength-order ablation",
+      "filename": "NB05_WAVELENGTH_ORDER_ABLATION.ipynb",
+      "source_files": [
+        "notebooks/src/NB05_part01.py",
+        "notebooks/src/NB05_part02.py",
+        "notebooks/src/NB05_part03.py"
+      ],
+      "wrapper_sha256": "233a1ca80908812b797feddd27f4ac18dd57306b4d7b38adcde0dc6c3d8322df"
+    },
+    {
+      "stage": "NB06",
+      "description": "Statistical robustness and model comparison",
+      "filename": "NB06_STATISTICAL_ROBUSTNESS.ipynb",
+      "source_files": [
+        "notebooks/src/NB06_part01.py",
+        "notebooks/src/NB06_part02.py"
+      ],
+      "wrapper_sha256": "8ddd9fc2a534bd5060870e9cbd478d9b3c52b4ca7913776d931ae337863a62ea"
+    },
+    {
+      "stage": "NB07",
+      "description": "Practical applicability analyses",
+      "filename": "NB07_PRACTICAL_APPLICABILITY.ipynb",
+      "source_files": [
+        "notebooks/src/NB07_part01.py",
+        "notebooks/src/NB07_part02.py",
+        "notebooks/src/NB07_part03.py",
+        "notebooks/src/NB07_part04.py"
+      ],
+      "wrapper_sha256": "70fed448e483b3eb83201680cb58993066ef855a652305ed023876a49febcf17"
+    },
+    {
+      "stage": "NB08",
+      "description": "Publication figures and tables",
+      "filename": "NB08_PUBLICATION_FIGURES_TABLES.ipynb",
+      "source_files": [
+        "notebooks/src/NB08_part01.py",
+        "notebooks/src/NB08_part02.py"
+      ],
+      "wrapper_sha256": "5f49a3a3afee320da87c31a6f3acc905d6a38204e76cc4cab934cd0cd1f3c021"
+    }
   ]
 }
