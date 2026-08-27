@@ -267,3 +267,109 @@ phase_metrics = phase_metrics.sort_values(['model','storage_phase'])
 phase_metrics['storage_phase'] = phase_metrics['storage_phase'].astype(str)
 phase_metrics.to_csv(RESULT_DIR / 'NB07_metrics_by_storage_phase.csv', index=False)
 
+day_rows = []
+for (model_name, day), g in oof.groupby(['model','storage_days']):
+    row = {'model': model_name, 'storage_days': int(day)}
+    row.update(metrics_block(g,'y_pred'))
+    day_rows.append(row)
+day_metrics = pd.DataFrame(day_rows).sort_values(['model','storage_days'])
+day_metrics.to_csv(RESULT_DIR / 'NB07_metrics_by_storage_day.csv', index=False)
+
+worst_days = (
+    day_metrics[day_metrics['model'].isin(MODELS_MAIN)]
+    .sort_values(['model','MAE_days'], ascending=[True,False])
+    .groupby('model', as_index=False)
+    .head(3)
+)
+worst_days.to_csv(RESULT_DIR / 'NB07_three_worst_days_per_model.csv', index=False)
+
+display(phase_metrics[['model','storage_phase','MAE_days','RMSE_days','R2','bias_days',
+                       'within_2d_pct','within_3d_pct']])
+
+# ---- Original notebook code cell 8 ----
+
+# Sensibilidad operativa secundaria al clipping físico [0,21].
+clip_rows = []
+
+for model_name, g in oof.groupby('model'):
+    raw_m = metrics_block(g, 'y_pred')
+    clip_m = metrics_block(g, 'y_pred_clipped')
+    clip_rows.append({
+        'model': model_name,
+        'out_of_range_pct_raw': raw_m['out_of_range_pct'],
+        'MAE_raw': raw_m['MAE_days'],
+        'MAE_clipped': clip_m['MAE_days'],
+        'delta_MAE_clipped_minus_raw': clip_m['MAE_days'] - raw_m['MAE_days'],
+        'RMSE_raw': raw_m['RMSE_days'],
+        'RMSE_clipped': clip_m['RMSE_days'],
+        'delta_RMSE_clipped_minus_raw': clip_m['RMSE_days'] - raw_m['RMSE_days'],
+        'R2_raw': raw_m['R2'],
+        'R2_clipped': clip_m['R2'],
+        'delta_R2_clipped_minus_raw': clip_m['R2'] - raw_m['R2']
+    })
+
+clipping = pd.DataFrame(clip_rows)
+clipping['model'] = pd.Categorical(clipping['model'], categories=order, ordered=True)
+clipping = clipping.sort_values('model').reset_index(drop=True)
+clipping['model'] = clipping['model'].astype(str)
+clipping.to_csv(RESULT_DIR / 'NB07_operational_clipping_sensitivity.csv', index=False)
+
+print('IMPORTANTE: clipping es análisis secundario; no sustituye las métricas primarias sin clipping.')
+display(clipping)
+
+# ---- Original notebook code cell 9 ----
+
+# Auditoría de evidencia estadística NB06 para la síntesis práctica.
+pairwise = pd.read_csv(NB06_PAIRWISE)
+
+top3_mask = (
+    pairwise['model_A'].isin(['SVR','PLSR','ANN']) &
+    pairwise['model_B'].isin(['SVR','PLSR','ANN'])
+)
+top3_pairs = pairwise[top3_mask].copy()
+assert len(top3_pairs) == 3
+
+all_top3_nonsig = bool((top3_pairs['p_holm'] >= 0.05).all())
+
+cross_rows = []
+for _, r in pairwise.iterrows():
+    a, b = r['model_A'], r['model_B']
+    top = {'SVR','PLSR','ANN'}
+    rec = {'SimpleRNN','LSTM','BiLSTM'}
+    if (a in top and b in rec) or (b in top and a in rec):
+        cross_rows.append(r)
+cross = pd.DataFrame(cross_rows)
+assert len(cross) == 9
+all_top_vs_recurrent_sig = bool((cross['p_holm'] < 0.05).all())
+
+evidence = pd.DataFrame([{
+    'all_SVR_PLSR_ANN_pairwise_nonsignificant_Holm': all_top3_nonsig,
+    'all_top3_vs_recurrent_pairwise_significant_Holm': all_top_vs_recurrent_sig,
+    'n_top3_pairs': len(top3_pairs),
+    'n_top3_vs_recurrent_pairs': len(cross)
+}])
+evidence.to_csv(RESULT_DIR / 'NB07_NB06_evidence_gate.csv', index=False)
+display(evidence)
+
+# ---- Original notebook code cell 11 ----
+
+# Carga de dataset espectral y configuraciones congeladas.
+raw = pd.read_csv(RAW_CSV)
+spectral_cols = [c for c in raw.columns if c.startswith('Spectra_')]
+spectral_cols = sorted(spectral_cols, key=lambda c: float(c.split('_')[-1]))
+
+assert len(raw) == 660
+assert len(spectral_cols) == 331
+assert raw['sample'].nunique() == 30
+assert raw['storage_days'].nunique() == 22
+
+X = raw[spectral_cols].to_numpy(dtype=np.float64)
+y = raw['storage_days'].to_numpy(dtype=np.float64)
+
+cfg03 = pd.read_csv(NB03_SELECTED)
+cfg04 = pd.read_csv(NB04_SELECTED)
+
+print('NB03 selected config columns:', cfg03.columns.tolist())
+print('NB04 selected config columns:', cfg04.columns.tolist())
+display(cfg03)
+display(cfg04)
