@@ -1,6 +1,6 @@
 {
-  "schema": "NIR-HUEVOS public notebook source manifest v2.1",
-  "note": "Public notebooks are lightweight wrappers. Scientific source is stored under notebooks/src as source-only files or ordered source fragments derived from the frozen analysis notebooks. Stored cell outputs, execution counts, and user-specific Colab runtime metadata are excluded from the public notebook wrappers. The scientific execution code is retained, including stage-specific result-export/packaging code where it was part of the frozen workflow.",
+  "schema": "NIR-HUEVOS public notebook source manifest v2.2",
+  "note": "Public notebooks are lightweight wrappers. Scientific source is stored under notebooks/src as source-only files or ordered source fragments derived from the frozen analysis notebooks. Stored cell outputs, execution counts, user-specific Colab runtime metadata, and submission-package/export-only cells are excluded. Scientific analysis code and frozen methodological logic are retained.",
   "execution_order": [
     "NB01",
     "NB02",
@@ -80,10 +80,9 @@
       "source_files": [
         "notebooks/src/NB07_part01.py",
         "notebooks/src/NB07_part02.py",
-        "notebooks/src/NB07_part03.py",
-        "notebooks/src/NB07_part04.py"
+        "notebooks/src/NB07_part03.py"
       ],
-      "wrapper_sha256": "70fed448e483b3eb83201680cb58993066ef855a652305ed023876a49febcf17"
+      "wrapper_sha256": "b98d67ed459e34c11b17eb5952867a8b66e647f73fa6387b3c78e0da527a4313"
     },
     {
       "stage": "NB08",
