@@ -2,83 +2,40 @@
 
 Reproducibility repository for the manuscript:
 
-**Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep-Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures**
+**Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures**
 
-> Status: the frozen primary computational workflow and the compact complementary-analysis outputs have been synchronized with the submission manuscript prepared for **Foods (MDPI)**.
+> **Submission status:** manuscript submitted to **Foods (MDPI)**. The primary computational workflow is scientifically frozen; repository documentation may still receive non-scientific clarification while peer review is in progress.
 
-## Quick verification
+## Scientific scope
 
-With Python 3.11, a reviewer can install the lightweight reproducibility package and validate the frozen partitions without TensorFlow:
+This repository documents a secondary computational reanalysis of a public portable-NIR shell-egg dataset. The **egg is the independent biological unit**; repeated spectra from the same egg are not treated as independent samples.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install -e '.[test]'
-nir-eggs-verify-splits
-pytest
-```
-
-For the full deep-learning/core-notebook environment:
-
-```bash
-pip install -e '.[full]'
-```
-
-See [`docs/QUICKSTART.md`](docs/QUICKSTART.md) for the reviewer-focused execution guide.
-
-## Study overview
-
-This repository documents a leakage-safe re-evaluation of shell-egg storage-time prediction from spectra acquired with a portable miniaturized **SCiO NIR spectrometer**. The analysis treats the **egg as the independent biological unit**, rather than the individual spectrum.
-
-- 30 shell eggs
-- 22 repeated storage days per egg (days 0–21)
-- 660 spectra in total
+- 30 intact brown-shell eggs
+- 22 storage days per egg (0–21)
+- 660 spectra
 - 331 spectral variables
-- 740–1070 nm spectral range
+- SCiO NIR range: 740–1070 nm
 - 5 frozen outer egg-disjoint folds
 - 4 egg-disjoint inner folds for training-only model selection
-- Deep-learning seeds: 2026, 2027 and 2028
+- deep-learning seeds: 2026, 2027, 2028
 
-The inferential scope is **previously unseen eggs from the same acquisition campaign**. The study is not an external validation across farms, instruments, batches, breeds, seasons, temperatures, or humidity regimes.
+The inferential scope is **previously unseen eggs from the same acquisition campaign**. This study is not an external validation across farms, batches, instruments, breeds, seasons, temperatures, humidity regimes, or other acquisition domains.
 
-## Models
+## Data provenance
 
-The frozen analytical framework compares DummyMean, PLSR, RBF-SVR, ANN, SimpleRNN, LSTM and BiLSTM. The recurrent architectures operate along the ordered wavelength axis; this axis is **spectral, not temporal**.
+The source dataset is publicly available from **Mendeley Data, Version 2**:
 
-## Main frozen OOF results
+- Ramírez-Morales, I. (2019), *NIR spectra of poultry eggs at different storage days ranging from 0 to 21*
+- DOI: `10.17632/6hn67h2trb.2`
+- Source-data license stated by Mendeley Data: **CC BY 4.0**
 
-| Model | MAE (days) | RMSE (days) | R² |
-|---|---:|---:|---:|
-| SVR | **2.195** | **2.716** | **0.817** |
-| PLSR | 2.267 | 2.864 | 0.796 |
-| ANN | 2.289 | 2.974 | 0.780 |
-| BiLSTM | 4.558 | 5.586 | 0.225 |
-| LSTM | 4.710 | 5.572 | 0.229 |
-| SimpleRNN | 4.879 | 5.722 | 0.187 |
+The raw spectral CSV is intentionally **not duplicated** here. Readers should obtain it from the authoritative Mendeley record and verify the exact computational input with SHA-256:
 
-These values are descriptive pooled out-of-fold point estimates. Egg-level inference showed that **SVR, PLSR and ANN did not differ significantly from one another after Holm correction**, whereas each of those three models significantly outperformed the recurrent architectures in the primary pairwise analysis. Non-significance is not interpreted as equivalence.
+`cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e`
 
-## Complementary analyses after the primary workflow was frozen
+See `data/README.md` and `docs/DATA_PROVENANCE.md`.
 
-The manuscript also reports compact sensitivity and applied analyses that were added **after** NB01–NB08 had been frozen. They do not replace the primary estimates.
-
-- **Row-level partition diagnostic.** In every random row-level fold, all 30 eggs occurred in both training and test partitions. Relative to the valid egg-disjoint OOF estimates, row-level MAE was lower by 6.47% for SVR, 7.18% for PLSR, and 5.06% for ANN, with R² inflation of approximately 0.023–0.029.
-- **SVR wider-grid sensitivity.** The frozen primary SVR remained slightly better (MAE 2.195, RMSE 2.716, R² 0.817) than the wider-grid sensitivity model (MAE 2.212, RMSE 2.735, R² 0.814). The sensitivity analysis therefore does not replace NB03.
-- **Chronological storage-age phases.** From valid egg-disjoint continuous OOF predictions, SVR achieved 78.6% accuracy, balanced accuracy 0.786, macro-F1 0.788, and Cohen's κ 0.680 for Early (0–7 d), Middle (8–14 d), and Late (15–21 d). These are age bands, **not freshness, safety, acceptability, or rejection classes**.
-- **Prediction attenuation.** Predicted-on-observed slopes were 0.855 for SVR, 0.845 for PLSR, and 0.823 for ANN; whole-egg bootstrap 95% confidence intervals remained below 1 for all three models.
-
-Compact outputs are stored under [`results/complementary/`](results/complementary/). The complementary source notebooks are supplied with the manuscript submission package rather than used to redefine the frozen repository core.
-
-## Why this repository differs from the legacy analysis
-
-The original notebook used a random row-level train/test split. Because every egg contributed repeated spectra across storage days, spectra from the same biological unit could occur in both training and test sets. The reconstructed workflow therefore uses frozen egg-disjoint outer and inner partitions, training-only preprocessing/tuning, out-of-fold predictions, multi-seed deep-learning evaluation, egg-level statistical inference and wavelength-order ablation.
-
-The original notebook is preserved under `legacy/` for provenance; it is not the source of the current manuscript claims.
-
-## Reproducible analysis sequence
-
-### Frozen primary workflow
+## Frozen primary workflow
 
 ```text
 NB01_DATA_AUDIT
@@ -98,128 +55,91 @@ NB07_PRACTICAL_APPLICABILITY
 NB08_PUBLICATION_FIGURES_TABLES
 ```
 
-Each primary stage consumes frozen outputs from the preceding stages. Performance is never re-estimated from a model fitted to all 30 eggs.
+Primary model selection is performed only with outer-training eggs. Main predictive performance is calculated from frozen egg-disjoint outer-fold out-of-fold (OOF) predictions.
 
-### Complementary manuscript analyses
+The public `.ipynb` files under `notebooks/` are lightweight execution wrappers. To prevent drift, they checkout the immutable core-source commit:
 
-```text
-Frozen NB03/NB04/NB06/NB07 outputs
-          ├── row-level partition diagnostic
-          ├── wider-grid SVR sensitivity
-          ├── chronological storage-age phase analysis
-          └── predicted-on-observed attenuation analysis
+`bcdf89dc8f3ad3ca17068210bb8c733748e5a653`
+
+Frozen scientific source hashes are recorded in `notebooks/notebook_source_manifest.json`.
+
+## Main frozen OOF results
+
+| Model | MAE (days) | RMSE (days) | R² |
+|---|---:|---:|---:|
+| SVR | **2.195** | **2.716** | **0.817** |
+| PLSR | 2.267 | 2.864 | 0.796 |
+| ANN | 2.289 | 2.974 | 0.780 |
+| BiLSTM | 4.558 | 5.586 | 0.225 |
+| LSTM | 4.710 | 5.572 | 0.229 |
+| SimpleRNN | 4.879 | 5.722 | 0.187 |
+
+SVR has the lowest pooled OOF point-estimate error, but egg-level inference does **not** support treating SVR, PLSR, and ANN as statistically distinct winners after Holm correction. Non-significance is not interpreted as equivalence.
+
+## Complementary analyses
+
+After NB01–NB08 and the primary OOF predictions were frozen, compact secondary analyses were added without changing the primary model-selection or inference rules:
+
+- **Row-level partition diagnostic:** every random row-level fold placed all 30 eggs in both training and test; MAE appeared 5.1–7.2% lower for SVR/PLSR/ANN than under valid egg-disjoint evaluation.
+- **Wider-grid SVR sensitivity:** did not improve the frozen primary SVR estimate.
+- **Chronological storage-age phases:** SVR reached 78.6% accuracy, macro-F1 = 0.788, and Cohen's κ = 0.680 for Early (0–7 d), Middle (8–14 d), and Late (15–21 d).
+- **Prediction attenuation:** predicted-on-observed slopes were below 1 for SVR, PLSR, and ANN.
+
+These are supporting analyses, not replacements for the frozen primary workflow. Early/Middle/Late are **chronological storage-age bands**, not independently validated freshness, safety, acceptability, or rejection classes.
+
+Auditable numerical outputs are under `results/complementary/` and are mapped to the manuscript in `docs/MANUSCRIPT_REPOSITORY_MAPPING.md`.
+
+## Quick reviewer audit
+
+With Python 3.11:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -e '.[test]'
+nir-eggs-verify-splits
+pytest
 ```
 
-These analyses are explicitly separated from the primary confirmatory workflow.
+For the full deep-learning notebook environment:
 
-## Repository structure
-
-```text
-.
-├── README.md
-├── CITATION.cff
-├── pyproject.toml
-├── requirements.txt
-├── requirements-ci.txt
-├── environment.yml
-├── data/
-│   ├── README.md
-│   └── frozen_splits/
-├── notebooks/
-│   └── notebook_source_manifest.json
-├── scripts/
-│   ├── 01_data_audit.py
-│   └── 02_verify_frozen_splits.py
-├── src/nir_eggs/
-├── protocol/
-│   └── frozen_protocol.json
-├── results/
-│   ├── statistical_robustness/
-│   ├── practical_applicability/
-│   └── complementary/
-├── figures/publication/
-│   └── FIGURE_CAPTIONS.md
-├── tables/publication/
-├── docs/
-│   ├── ANALYSIS_PROTOCOL.md
-│   ├── DATA_DICTIONARY.md
-│   ├── MANUSCRIPT_REPOSITORY_MAPPING.md
-│   ├── QUICKSTART.md
-│   └── REPRODUCIBILITY.md
-├── tests/
-└── legacy/
+```bash
+pip install -e '.[full]'
 ```
 
-## Reproducibility principles
+The lightweight CI/test suite verifies package installation, split integrity and hashes, frozen protocol constraints, core preprocessing/statistical utilities, deterministic wavelength-order logic, selected publication values, and archival metadata. It intentionally does **not** retrain the expensive TensorFlow models on every GitHub Actions run.
 
-1. **Independent biological unit = egg.** The 660 spectra are repeated observations, not 660 independent samples.
-2. **Frozen outer folds.** The same five egg-disjoint test folds are used for every primary model.
-3. **Nested model selection.** Preprocessing, hyperparameters and epoch budgets are selected using only outer-training eggs.
-4. **OOF-only primary performance reporting.** Main predictive metrics are calculated only from predictions for unseen outer-test eggs.
-5. **Seeds are algorithmic repeats, not biological replicates.** Deep-learning inference is aggregated at the egg level.
-6. **Mechanistic ablation.** Original, reversed and fixed target-independent shuffled wavelength orders are compared without retuning.
-7. **Complementary analyses remain secondary.** They quantify sensitivity, contamination risk, applied age-phase discrimination and attenuation without changing the frozen primary model-selection rules.
-8. **Hash-based auditability.** Frozen data/split manifests and standardized result packages are checked using SHA-256.
+See `docs/QUICKSTART.md` for the reviewer-focused workflow.
 
-## Frozen splits
+## Critical interpretation rules
 
-`data/frozen_splits/` contains the exact outer and inner group assignments used by every primary model. The manifest itself has frozen SHA-256:
+1. **Independent biological unit = egg (n = 30).** The 660 spectra are repeated observations.
+2. **Primary performance = egg-disjoint OOF predictions.**
+3. **No outer-test information is used for model selection.**
+4. **Deep-learning seeds are algorithmic repeats, not biological replicates.**
+5. **Non-significance is not evidence of equivalence.**
+6. **Row-level splitting is diagnostic and intentionally leaky at the biological-unit level.**
+7. **Wavelength-order ablation is mechanistic, not a new tuning route.**
+8. **CPU latency values are environment-specific engineering references, not mobile/SCiO deployment benchmarks.**
+9. **External validation has not been performed.**
 
-`fbeb8fa19d522cd91bee875bf5731cda264475da27bc7e93c25ca0d6f0f33717`
+## Repository map
 
-The repository's GitHub Actions workflow verifies both the manifest and its split-file hashes automatically.
+- `data/frozen_splits/` — exact nested egg-disjoint assignments and hash manifest
+- `notebooks/` — public reviewer-facing NB01–NB08 wrappers
+- `notebooks/src/` — frozen scientific source code/fragments
+- `src/nir_eggs/` — reusable reproducibility utilities
+- `protocol/` — frozen protocol and reproducibility snapshot
+- `results/` — frozen statistical, practical, and complementary outputs
+- `tables/publication/` — manuscript numerical tables
+- `figures/publication/` — final figure captions and publication mapping
+- `docs/` — protocol, data provenance, quickstart, and manuscript-to-repository map
+- `tests/` — automated reproducibility checks
+- `legacy/` — earlier row-level analysis retained only for provenance
 
-## Source code and notebooks
+## Citation and archival status
 
-The reusable installable package under `src/nir_eggs/` mirrors the final primary preprocessing, metrics, statistical utilities, model capacity, split logic and wavelength-order ablation rules. `notebooks/notebook_source_manifest.json` records the eight cleaned NB01–NB08 source notebooks and their SHA-256 fingerprints. Cleaned notebook copies are defined as copies with output cells and execution counts removed while scientific source and markdown are preserved.
+Use `CITATION.cff` when citing this repository. The repository URL is already cited by the submitted manuscript and therefore should **not be renamed during peer review**.
 
-The compact outputs required to audit the complementary manuscript claims are public under `results/complementary/`. Their source notebooks are part of the manuscript supplementary analysis package and are not presented as a redefinition of the frozen NB01–NB08 core.
-
-## Statistical analysis
-
-The primary inferential outcome is per-egg MAE across the 22 storage days. The confirmatory workflow uses Friedman testing, Kendall's W, paired Wilcoxon signed-rank comparisons, Holm correction and paired egg-level bootstrap with 10,000 resamples.
-
-No claim of model equivalence is made from a non-significant difference because no confirmatory equivalence margin was prespecified.
-
-## Wavelength-order ablation
-
-The deep-learning models are evaluated under original (740→1070 nm), reversed (1070→740 nm) and fixed target-independent shuffled spectral orders. Preprocessing is always performed in the true physical wavelength order **before** reordering. This prevents Savitzky–Golay smoothing/derivatives from being applied to an artificial spectral sequence.
-
-## Publication tables and figures
-
-The numerical sources matching the final manuscript numbering are stored under `tables/publication/`. Legacy frozen filenames from the pre-revision package are retained where needed for provenance and automated regression tests; `tables/publication/README.md` documents the mapping.
-
-Figure captions matching the final revised figures are stored under `figures/publication/FIGURE_CAPTIONS.md`. Submission-quality 600-dpi PNG/TIFF artwork is generated from the frozen outputs and supplied with the manuscript submission files.
-
-## Practical applicability
-
-The repository documents operational tolerance (±1, ±2 and ±3 days), early/middle/late storage behavior, clipping sensitivity, model complexity and CPU latency. CPU timings are implementation-specific reference measurements and are **not** claims about SCiO, smartphone or embedded-device latency.
-
-## Data
-
-The spectral dataset is openly available in Mendeley Data, Version 2, DOI `10.17632/6hn67h2trb.2`. The raw CSV is not duplicated in this repository; readers should obtain the dataset from the cited source and verify the frozen SHA-256:
-
-`cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e`
-
-Frozen split assignments can be redistributed independently because they contain identifiers and partition metadata rather than spectral measurements.
-
-## Automated checks
-
-GitHub Actions installs the project as a normal Python package and validates:
-
-- package installation and CLI availability
-- core regression/statistical utilities
-- train-only MSC behavior
-- exact frozen split-manifest and split-file hashes
-- outer/inner egg-disjointness and fold sizes
-- frozen search grids and neural-network capacity constants
-- deterministic wavelength-order permutation
-- frozen publication-table values and statistical interpretation guards
-
-## Citation
-
-Please use [`CITATION.cff`](CITATION.cff) when citing this repository. Final DOI/journal metadata will be added after archival release or publication.
-
-## License
-
-A software/data license will be selected before archival release. Until then, no additional redistribution rights should be inferred beyond those granted by GitHub and the original data source.
+A tagged archival release/DOI has not yet been created. A software-code license has also not yet been selected by the authors; the CC BY 4.0 statement above applies to the **source dataset** as stated by Mendeley Data and must not be conflated with repository software rights.
