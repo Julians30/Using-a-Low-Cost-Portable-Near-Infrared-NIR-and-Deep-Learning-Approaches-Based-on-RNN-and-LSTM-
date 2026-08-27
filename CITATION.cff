@@ -7,31 +7,32 @@ url: "https://github.com/Julians30/Using-a-Low-Cost-Portable-Near-Infrared-NIR-a
 authors:
   - family-names: Coronel-Reyes
     given-names: Julián
-  - family-names: Haro-Sarango
-    given-names: Alexander
+  - family-names: Quiguango Farias
+    given-names: Diego
   - family-names: Vergara-Lozano
     given-names: Vanessa
   - family-names: Delgado-Vera
     given-names: Carlota
-  - family-names: Quiguango Farias
-    given-names: Diego
+  - family-names: Haro-Sarango
+    given-names: Alexander
   - family-names: Carvajal-Romero
     given-names: Héctor Ramiro
 preferred-citation:
   type: article
-  title: "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep-Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures"
+  title: "Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures"
   authors:
     - family-names: Coronel-Reyes
       given-names: Julián
-    - family-names: Haro-Sarango
-      given-names: Alexander
+    - family-names: Quiguango Farias
+      given-names: Diego
     - family-names: Vergara-Lozano
       given-names: Vanessa
     - family-names: Delgado-Vera
       given-names: Carlota
-    - family-names: Quiguango Farias
-      given-names: Diego
+    - family-names: Haro-Sarango
+      given-names: Alexander
     - family-names: Carvajal-Romero
       given-names: Héctor Ramiro
+  journal: "Foods"
   year: 2026
-  notes: "Manuscript prepared for submission; journal/DOI metadata and repository release date will be updated after acceptance or archival release."
+  notes: "Manuscript submitted to Foods (MDPI); journal DOI and archival release metadata will be added if and when assigned."
