@@ -1,6 +1,6 @@
 # Archival Release Checklist
 
-This checklist defines the minimum conditions before creating a citable GitHub/Zenodo-style release for the manuscript companion repository.
+This checklist distinguishes what is already sufficient for peer-review reproducibility from what is still needed only for a final archival release.
 
 ## Scientific freeze
 
@@ -13,32 +13,36 @@ This checklist defines the minimum conditions before creating a citable GitHub/Z
 - [x] NB07 practical-applicability analysis frozen.
 - [x] NB08 publication tables/figure specifications frozen.
 - [x] Main manuscript values cross-checked against frozen publication tables.
+- [x] Complementary analyses clearly separated from the frozen primary workflow.
 
-## Reproducibility controls
+## Reproducibility controls completed
 
-- [x] Dataset SHA-256 documented.
+- [x] Authoritative public dataset source documented: Mendeley Data Version 2, DOI `10.17632/6hn67h2trb.2`.
+- [x] Source-data license documented as CC BY 4.0.
+- [x] Raw spectral CSV intentionally not duplicated; exact analytical SHA-256 documented.
 - [x] Split-manifest SHA-256 documented and automatically verified.
 - [x] Per-file split hashes automatically verified.
+- [x] Public NB01–NB08 reviewer-facing notebooks committed.
+- [x] Frozen primary scientific source committed under `notebooks/src/`.
+- [x] Primary wrappers pinned to immutable core-source commit `bcdf89dc8f3ad3ca17068210bb8c733748e5a653`.
 - [x] Reusable source package installable via `pyproject.toml`.
 - [x] Lightweight CI tests pass after normal package installation.
 - [x] CLI command verifies frozen nested splits.
 - [x] CLI command audits an authorized local copy of the raw dataset.
 - [x] Legacy row-level analysis preserved separately for provenance.
 - [x] Manuscript-to-repository evidence map documented.
+- [x] `CITATION.cff` aligned with the submitted manuscript author order and title.
 
-## Still required before archival release
+## Still required only before a final archival release
 
-- [ ] Verify authoritative raw-dataset source and redistribution terms.
-- [ ] Decide whether the raw spectral CSV can legally be redistributed.
-- [ ] Add cleaned NB01–NB08 notebook files to the repository or document an archival source from which their recorded SHA-256 copies can be obtained.
-- [ ] Decide final repository name.
-- [ ] Select a software-code license explicitly; do not apply it automatically to third-party/source data.
-- [ ] Decide whether publication PNG previews are stored in Git; keep large TIFF submission masters outside normal Git history unless necessary.
-- [ ] Freeze final manuscript version and ensure all displayed values match `tables/publication/`.
-- [ ] Update `CITATION.cff` with final repository/release metadata.
-- [ ] Create a tagged release only after all above items are resolved.
-- [ ] If using Zenodo or another archive, add DOI after the archived release exists.
-- [ ] Update manuscript Data Availability / Code Availability statements with final persistent links.
+- [ ] Select a software-code license explicitly. Do not apply the source dataset's CC BY 4.0 automatically to repository code.
+- [ ] Decide whether to create a tagged release and persistent archival DOI (e.g., Zenodo). This is not required for the current peer-review submission.
+- [ ] Add final journal citation/DOI to `CITATION.cff` after publication metadata exists.
+- [ ] If editorially permitted after acceptance, update persistent archival links in the final paper; otherwise preserve the already-cited GitHub URL.
+
+## Repository-name rule during peer review
+
+The submitted manuscript already cites the current GitHub URL. **Do not rename this repository during peer review**, because doing so could create avoidable link ambiguity. GitHub normally redirects renamed repositories, but reproducibility documentation should not depend on that behavior while the manuscript is under review.
 
 ## Reviewer-facing acceptance test
 
@@ -46,15 +50,17 @@ From a clean clone with Python 3.11:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 python -m pip install --upgrade pip
 pip install -e '.[test]'
 nir-eggs-verify-splits
 pytest
 ```
 
-Expected outcome: all tests and hash checks pass without modifying frozen files.
+Expected outcome: all lightweight tests and frozen split/hash checks pass without modifying frozen scientific files.
+
+The CI intentionally does not retrain the computationally expensive TensorFlow models at every commit. Their frozen source, seeds, model-capacity constraints, selection boundaries, and result artifacts remain auditable in the repository.
 
 ## Release principle
 
-Do not create a nominally "reproducible" release if the repository contains code whose provenance is unclear, unpublished raw data with unresolved redistribution rights, or numerical tables that do not exactly match the submitted manuscript.
+Do not create a nominally archival release until software licensing and final publication metadata are resolved. Those remaining archival items do not prevent peer review of the current reproducibility package.
