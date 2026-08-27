@@ -1,6 +1,6 @@
 # Reproducibility Quickstart
 
-This quickstart is designed for a reviewer or reader who wants to verify the computational contract before attempting the expensive deep-learning stages.
+This guide is designed for a reviewer or reader who wants to verify the computational contract before attempting the expensive deep-learning stages.
 
 ## 1. Clone the repository
 
@@ -36,12 +36,12 @@ nir-eggs-verify-splits
 
 A valid result confirms:
 
-- exact split-manifest SHA-256
-- all per-file split hashes
-- 5 outer folds with 24 train / 6 unseen test eggs
-- 4 inner folds with 18 train / 6 validation eggs
-- zero egg overlap
-- every egg appears in exactly one outer test fold
+- exact split-manifest SHA-256;
+- all per-file split hashes;
+- 5 outer folds with 24 train / 6 unseen test eggs;
+- 4 inner folds with 18 train / 6 validation eggs;
+- zero egg overlap;
+- every egg appears in exactly one outer test fold.
 
 ## 4. Audit the raw dataset
 
@@ -57,7 +57,7 @@ The command refuses to proceed if the dataset SHA-256 differs from:
 cd5021c555ae6b57f892549c574599cef75edf87f58b3f7f4d246ade9327d15e
 ```
 
-A valid dataset has 660 rows, 30 eggs, 22 days, and 331 wavelength variables from 740 to 1070 nm.
+A valid analytical dataset has 660 rows, 30 eggs, 22 days, and 331 wavelength variables from 740 to 1070 nm.
 
 ## 5. Run the lightweight automated tests
 
@@ -65,21 +65,23 @@ A valid dataset has 660 rows, 30 eggs, 22 days, and 331 wavelength variables fro
 pytest
 ```
 
-These tests verify the core metrics/statistics, train-fitted preprocessing behavior, frozen model grids, frozen network-capacity constants, wavelength-order ablation logic, split integrity, and selected publication-table values.
+These tests verify core metrics/statistics, train-fitted preprocessing behavior, frozen model grids, frozen network-capacity constants, wavelength-order logic, split integrity, selected publication-table values, scientific-source hashes, and immutable pinning of the public NB01–NB08 wrappers.
 
 ## 6. Frozen primary analysis order
-
-The primary scientific execution order is:
 
 ```text
 NB01 → NB02 → NB03 → NB04 → NB05 → NB06 → NB07 → NB08
 ```
 
-The deep-learning stages are computationally expensive and were originally executed in Google Colab Pro. Reproducing the primary manuscript claims requires preserving the frozen partitions, seeds and training-only selection boundaries documented in `protocol/frozen_protocol.json` and `docs/ANALYSIS_PROTOCOL.md`.
+The public notebook wrappers checkout the immutable core-source commit:
 
-## 7. Verify final manuscript values without retraining
+`bcdf89dc8f3ad3ca17068210bb8c733748e5a653`
 
-The numerical sources for the final manuscript are under:
+The deep-learning stages are computationally expensive and were originally executed in Google Colab Pro. The frozen source intentionally preserves that execution contract. Reproducing the primary manuscript claims requires the exact raw dataset, frozen partitions, seeds, and training-only selection boundaries documented in `protocol/frozen_protocol.json` and `docs/ANALYSIS_PROTOCOL.md`.
+
+## 7. Verify manuscript values without retraining
+
+The numerical evidence used by the manuscript is under:
 
 ```text
 tables/publication/
@@ -90,7 +92,7 @@ results/complementary/
 
 The final manuscript numbering is documented in `tables/publication/README.md` and `docs/MANUSCRIPT_REPOSITORY_MAPPING.md`.
 
-Key complementary checks that can be verified directly from CSV files are:
+Key complementary checks that can be audited directly from the public result files include:
 
 - all 30 eggs overlap between training and test in every random row-level fold;
 - row-level MAE is 5.1–7.2% lower for SVR/PLSR/ANN than under valid egg-disjoint evaluation;
@@ -98,7 +100,7 @@ Key complementary checks that can be verified directly from CSV files are:
 - SVR chronological storage-age phase accuracy is 78.6%, with macro-F1 0.788 and Cohen's κ 0.680;
 - predicted-on-observed slopes for SVR, PLSR and ANN are below 1 with whole-egg bootstrap intervals below 1.
 
-The complementary source notebooks are supplied with the manuscript submission package; their public CSV outputs are kept separate from the frozen NB01–NB08 core so that sensitivity analyses are not mistaken for primary model selection.
+The complementary numerical outputs are public in the repository and are kept separate from the frozen NB01–NB08 core. The author-executed complementary notebooks are retained in the project computational records; they were not included in the submitted Supplementary Material ZIP and should not be treated as submitted supplementary files.
 
 ## Reproducibility boundary
 
