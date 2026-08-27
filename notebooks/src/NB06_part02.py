@@ -212,3 +212,100 @@ execution_status = {
 assert all(execution_status['assertions'].values())
 (RESULT_DIR/'EXECUTION_STATUS.json').write_text(json.dumps(execution_status,indent=2),encoding='utf-8')
 print('NB06 status: COMPLETED')
+
+# ---- Original notebook code cell 15 ----
+
+from google.colab import files as colab_files
+
+NB_CODE='NB06_STATISTICAL_ROBUSTNESS'
+ZIP_NAME='NB06_RESULTS_STATISTICAL_ROBUSTNESS.zip'
+PACKAGE_DIR=PROJECT_ROOT/'05_RESULTS'/'_PACKAGE_TMP'/NB_CODE
+
+if PACKAGE_DIR.exists():
+    shutil.rmtree(PACKAGE_DIR)
+PACKAGE_DIR.mkdir(parents=True,exist_ok=True)
+
+shutil.copytree(RESULT_DIR,PACKAGE_DIR/'05_RESULTS_NB06')
+shutil.copytree(FIG_DIR,PACKAGE_DIR/'06_FIGURES_NB06')
+
+src=PACKAGE_DIR/'SOURCE_FROZEN_INPUTS'
+src.mkdir(parents=True,exist_ok=True)
+for p in required:
+    shutil.copy2(p,src/f'{p.parent.name}__{p.name}')
+
+notebook_file=NOTEBOOKS_DIR/NOTEBOOK_FILENAME
+assert notebook_file.exists(), f'No se encontró {notebook_file}'
+txt=notebook_file.read_text(encoding='utf-8',errors='ignore')
+assert RUN_REVISION in txt
+notebook_sha=sha256_file(notebook_file)
+shutil.copy2(notebook_file,PACKAGE_DIR/NOTEBOOK_FILENAME)
+
+env_lines=[f'Python: {sys.version}',f'Platform: {platform.platform()}','']
+try:
+    env_lines.append(subprocess.check_output([sys.executable,'-m','pip','freeze'],text=True))
+except Exception as e:
+    env_lines.append(f'pip freeze failed: {e}')
+(PACKAGE_DIR/'environment_packages.txt').write_text('\n'.join(env_lines),encoding='utf-8')
+
+manifest={
+    'project':'NIR_HUEVOS_PAPER_REBUILD_2026',
+    'notebook':NB_CODE,
+    'notebook_filename':NOTEBOOK_FILENAME,
+    'executed_notebook_source_sha256':notebook_sha,
+    'run_revision':RUN_REVISION,
+    'package_schema':PACKAGE_SCHEMA,
+    'created_at_utc':datetime.now(timezone.utc).isoformat(),
+    'raw_dataset_included_in_zip':False,
+    'dataset_sha256':EXPECTED_DATASET_SHA256,
+    'frozen_split_manifest_sha256':EXPECTED_SPLIT_MANIFEST_SHA256,
+    'primary_independent_unit':'egg',
+    'primary_metric':'per-egg MAE',
+    'bootstrap_repetitions':BOOTSTRAP_REPS,
+    'bootstrap_seed':BOOTSTRAP_SEED,
+    'alpha':ALPHA,
+    'zip_name':ZIP_NAME
+}
+(PACKAGE_DIR/'RUN_MANIFEST.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+
+readme_lines=[
+    'NB06 STATISTICAL ROBUSTNESS — NIR-HUEVOS 2026',
+    '',
+    'STATUS: COMPLETED',
+    f'RUN REVISION: {RUN_REVISION}',
+    '',
+    'Primary independent unit: egg',
+    'N eggs: 30',
+    'Primary inferential metric: per-egg MAE',
+    'Primary global test: Friedman',
+    'Post-hoc: paired Wilcoxon signed-rank',
+    'Multiplicity: Holm',
+    'Effect size: rank-biserial correlation',
+    f'Bootstrap: {BOOTSTRAP_REPS} paired egg-level resamples, seed {BOOTSTRAP_SEED}',
+    '',
+    'Deep-learning seeds are not independent biological replicates.',
+    'DummyMean is a secondary benchmark.',
+    'RMSE and R² are secondary descriptive metrics.',
+    'No naive ANOVA and no Brier Score.',
+    'Raw dataset intentionally excluded.'
+]
+(PACKAGE_DIR/'README.txt').write_text('\n'.join(readme_lines),encoding='utf-8')
+
+inventory=[]
+for p in sorted(PACKAGE_DIR.rglob('*')):
+    if p.is_file() and p.name!='PACKAGE_INVENTORY.json':
+        inventory.append({
+            'relative_path':str(p.relative_to(PACKAGE_DIR)),
+            'size_bytes':p.stat().st_size,
+            'sha256':sha256_file(p)
+        })
+(PACKAGE_DIR/'PACKAGE_INVENTORY.json').write_text(json.dumps(inventory,indent=2),encoding='utf-8')
+
+zip_path=ZIP_DIR/ZIP_NAME
+if zip_path.exists():
+    zip_path.unlink()
+shutil.make_archive(str(zip_path.with_suffix('')),'zip',root_dir=PACKAGE_DIR)
+assert zip_path.exists() and zip_path.stat().st_size>0
+
+print('ZIP creado:',zip_path)
+print('Tamaño MB:',round(zip_path.stat().st_size/1024**2,2))
+colab_files.download(str(zip_path))
