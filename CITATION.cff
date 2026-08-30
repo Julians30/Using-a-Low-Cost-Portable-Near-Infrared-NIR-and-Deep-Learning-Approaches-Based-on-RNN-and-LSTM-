@@ -7,15 +7,13 @@ url: "https://github.com/Julians30/Using-a-Low-Cost-Portable-Near-Infrared-NIR-a
 authors:
   - family-names: Coronel-Reyes
     given-names: Julián
-  - family-names: Haro-Sarango
-    given-names: Alexander
-  - family-names: Quiguango Farias
-    given-names: Diego
+  - family-names: Haro Sarango
+    given-names: Alexander Fernando
   - family-names: Vergara-Lozano
     given-names: Vanessa
   - family-names: Delgado-Vera
     given-names: Carlota
-  - family-names: Carvajal-Romero
+  - family-names: Carvajal Romero
     given-names: Héctor Ramiro
 preferred-citation:
   type: article
@@ -23,16 +21,14 @@ preferred-citation:
   authors:
     - family-names: Coronel-Reyes
       given-names: Julián
-    - family-names: Haro-Sarango
-      given-names: Alexander
-    - family-names: Quiguango Farias
-      given-names: Diego
+    - family-names: Haro Sarango
+      given-names: Alexander Fernando
     - family-names: Vergara-Lozano
       given-names: Vanessa
     - family-names: Delgado-Vera
       given-names: Carlota
-    - family-names: Carvajal-Romero
+    - family-names: Carvajal Romero
       given-names: Héctor Ramiro
-  journal: "Foods"
+  journal: "Frontiers in Artificial Intelligence"
   year: 2026
-  notes: "Manuscript submitted to Foods (MDPI); journal DOI and archival release metadata will be added if and when assigned."
+  notes: "Original Research submitted on 30 August 2026 to Frontiers in Artificial Intelligence, specialty AI in Food, Agriculture and Water; Manuscript ID 1982643. Research Topic: Artificial Intelligence, Sensing, and Robotic Innovations in Animal and Food Systems for Next-Generation Processing and Safety. Journal DOI and final archival release metadata will be added if and when assigned."
