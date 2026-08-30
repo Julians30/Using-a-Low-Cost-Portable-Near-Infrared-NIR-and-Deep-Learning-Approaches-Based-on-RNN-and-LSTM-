@@ -4,7 +4,9 @@ Reproducibility repository for the manuscript:
 
 **Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures**
 
-> **Submission status:** manuscript submitted to **Foods (MDPI)**. The primary computational workflow is scientifically frozen; repository documentation may still receive non-scientific clarification while peer review is in progress.
+**Authors:** Julián Coronel-Reyes, Alexander Fernando Haro Sarango, Vanessa Vergara-Lozano, Carlota Delgado-Vera, and Héctor Ramiro Carvajal Romero.
+
+> **Submission status (30 August 2026):** manuscript submitted as **Original Research** to **Frontiers in Artificial Intelligence — AI in Food, Agriculture and Water** (Manuscript ID: **1982643**), within the Research Topic **Artificial Intelligence, Sensing, and Robotic Innovations in Animal and Food Systems for Next-Generation Processing and Safety**. The primary computational workflow is scientifically frozen; repository documentation may still receive non-scientific metadata clarification during editorial processing.
 
 ## Scientific scope
 
@@ -140,6 +142,6 @@ See `docs/QUICKSTART.md` for the reviewer-focused workflow.
 
 ## Citation and archival status
 
-Use `CITATION.cff` when citing this repository. The repository URL is already cited by the submitted manuscript and therefore should **not be renamed during peer review**.
+Use `CITATION.cff` when citing this repository. The repository URL is already cited by the submitted manuscript and therefore should **not be renamed during editorial processing or peer review**.
 
 A tagged archival release/DOI has not yet been created. A software-code license has also not yet been selected by the authors; the CC BY 4.0 statement above applies to the **source dataset** as stated by Mendeley Data and must not be conflated with repository software rights.
