@@ -1,5 +1,15 @@
 # Manuscript–Repository Evidence Map
 
+## Current submission target
+
+This evidence map corresponds to the substantially revised manuscript prepared for resubmission to **AgriEngineering (MDPI)** on 1 September 2026, following the Editor-in-Chief's invitation to resubmit. Previous AgriEngineering manuscript ID: `agriengineering-4541576`. The new SuSy manuscript ID is pending assignment.
+
+Manuscript title:
+
+**Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures**
+
+See `docs/AGRIENGINEERING_RESUBMISSION.md` for the journal-specific revision summary.
+
 This document identifies the computational evidence supporting the major manuscript components. It is intended to make peer-review audit easier and to prevent accidental use of legacy results.
 
 ## Frozen primary workflow
