@@ -6,7 +6,7 @@ Reproducibility repository for the manuscript:
 
 **Authors:** Julián Coronel-Reyes, Alexander Fernando Haro Sarango, Vanessa Vergara-Lozano, Carlota Delgado-Vera, and Héctor Ramiro Carvajal Romero.
 
-> **Current submission target (1 September 2026):** substantially revised manuscript prepared for formal resubmission as an **Article** to **AgriEngineering (MDPI)** following the Editor-in-Chief's invitation to resubmit after major methodological revision. Previous AgriEngineering manuscript ID: **agriengineering-4541576**. A new manuscript ID will be added here once SuSy assigns it. The primary computational workflow is scientifically frozen; repository documentation may receive non-scientific metadata clarification during editorial processing.
+> **Current submission target (1 September 2026):** substantially revised manuscript formally resubmitted as an **Article** to **AgriEngineering (MDPI)** following the Editor-in-Chief's invitation to resubmit after major methodological revision. Previous AgriEngineering manuscript ID: **agriengineering-4541576**. Current AgriEngineering manuscript ID: **agriengineering-4569691**. The primary computational workflow is scientifically frozen; repository documentation may receive non-scientific metadata clarification during editorial processing.
 
 See `docs/AGRIENGINEERING_RESUBMISSION.md` for the journal-specific resubmission note and a concise map of the principal revisions.
 
