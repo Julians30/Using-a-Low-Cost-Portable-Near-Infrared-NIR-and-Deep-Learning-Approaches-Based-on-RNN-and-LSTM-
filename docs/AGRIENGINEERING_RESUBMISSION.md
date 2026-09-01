@@ -4,13 +4,13 @@
 **Article type:** Article  
 **Status date:** 1 September 2026  
 **Previous AgriEngineering manuscript ID:** `agriengineering-4541576`  
-**New manuscript ID:** pending assignment in SuSy
+**Current AgriEngineering manuscript ID:** `agriengineering-4569691`
 
 ## Manuscript title
 
 **Determination of the Storage Time of Shell Eggs at Ambient Temperature Using a Low-Cost Portable Near-Infrared (NIR) Spectrometer and Deep Learning Approaches Based on Recurrent Neural Network (RNN) and Long Short-Term Memory (LSTM) Architectures**
 
-This repository is the public reproducibility package linked to the substantially revised manuscript prepared for resubmission to **AgriEngineering** after the Editor-in-Chief invited the authors to resubmit a substantially revised version.
+This repository is the public reproducibility package linked to the substantially revised manuscript formally resubmitted to **AgriEngineering** after the Editor-in-Chief invited the authors to resubmit a substantially revised version.
 
 ## What is scientifically new in the revised manuscript
 
@@ -70,4 +70,4 @@ The raw CSV is intentionally not duplicated in this repository. The exact analyt
 
 ## Editorial metadata rule
 
-The repository URL is cited in the AgriEngineering submission manuscript. **Do not rename the repository during peer review.** When SuSy assigns the new AgriEngineering manuscript ID, only editorial metadata should be updated; the frozen scientific source and primary numerical results must not be redefined.
+The repository URL is cited in the AgriEngineering submission manuscript. **Do not rename the repository during peer review.** The current AgriEngineering manuscript ID is `agriengineering-4569691`; any future metadata update must remain editorial only, without redefining the frozen scientific source or primary numerical results.
