@@ -6,7 +6,9 @@ Reproducibility repository for the manuscript:
 
 **Authors:** Julián Coronel-Reyes, Alexander Fernando Haro Sarango, Vanessa Vergara-Lozano, Carlota Delgado-Vera, and Héctor Ramiro Carvajal Romero.
 
-> **Submission status (30 August 2026):** manuscript submitted as **Original Research** to **Frontiers in Artificial Intelligence — AI in Food, Agriculture and Water** (Manuscript ID: **1982643**), within the Research Topic **Artificial Intelligence, Sensing, and Robotic Innovations in Animal and Food Systems for Next-Generation Processing and Safety**. The primary computational workflow is scientifically frozen; repository documentation may still receive non-scientific metadata clarification during editorial processing.
+> **Current submission target (1 September 2026):** substantially revised manuscript prepared for formal resubmission as an **Article** to **AgriEngineering (MDPI)** following the Editor-in-Chief's invitation to resubmit after major methodological revision. Previous AgriEngineering manuscript ID: **agriengineering-4541576**. A new manuscript ID will be added here once SuSy assigns it. The primary computational workflow is scientifically frozen; repository documentation may receive non-scientific metadata clarification during editorial processing.
+
+See `docs/AGRIENGINEERING_RESUBMISSION.md` for the journal-specific resubmission note and a concise map of the principal revisions.
 
 ## Scientific scope
 
@@ -136,12 +138,12 @@ See `docs/QUICKSTART.md` for the reviewer-focused workflow.
 - `results/` — frozen statistical, practical, and complementary outputs
 - `tables/publication/` — manuscript numerical tables
 - `figures/publication/` — final figure captions and publication mapping
-- `docs/` — protocol, data provenance, quickstart, and manuscript-to-repository map
+- `docs/` — protocol, data provenance, quickstart, manuscript-to-repository map, and AgriEngineering resubmission note
 - `tests/` — automated reproducibility checks
 - `legacy/` — earlier row-level analysis retained only for provenance
 
 ## Citation and archival status
 
-Use `CITATION.cff` when citing this repository. The repository URL is already cited by the submitted manuscript and therefore should **not be renamed during editorial processing or peer review**.
+Use `CITATION.cff` when citing this repository. The repository URL is cited by the AgriEngineering resubmission manuscript and therefore should **not be renamed during editorial processing or peer review**.
 
 A tagged archival release/DOI has not yet been created. A software-code license has also not yet been selected by the authors; the CC BY 4.0 statement above applies to the **source dataset** as stated by Mendeley Data and must not be conflated with repository software rights.
