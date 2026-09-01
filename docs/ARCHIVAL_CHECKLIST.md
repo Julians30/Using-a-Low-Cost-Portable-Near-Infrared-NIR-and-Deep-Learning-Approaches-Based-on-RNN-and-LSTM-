@@ -31,10 +31,12 @@ This checklist distinguishes what is already sufficient for peer-review reproduc
 - [x] CLI command audits an authorized local copy of the raw dataset.
 - [x] Legacy row-level analysis preserved separately for provenance.
 - [x] Manuscript-to-repository evidence map documented.
-- [x] `CITATION.cff` aligned with the submitted manuscript author order and title.
+- [x] `CITATION.cff` aligned with the manuscript author order and title.
+- [x] README, `CITATION.cff`, manuscript evidence map, and journal-specific resubmission note aligned to the **AgriEngineering** resubmission target (1 September 2026; previous manuscript ID `agriengineering-4541576`).
 
 ## Still required only before a final archival release
 
+- [ ] Add the new AgriEngineering manuscript ID after SuSy assigns it.
 - [ ] Select a software-code license explicitly. Do not apply the source dataset's CC BY 4.0 automatically to repository code.
 - [ ] Decide whether to create a tagged release and persistent archival DOI (e.g., Zenodo). This is not required for the current peer-review submission.
 - [ ] Add final journal citation/DOI to `CITATION.cff` after publication metadata exists.
@@ -42,7 +44,7 @@ This checklist distinguishes what is already sufficient for peer-review reproduc
 
 ## Repository-name rule during peer review
 
-The submitted manuscript already cites the current GitHub URL. **Do not rename this repository during peer review**, because doing so could create avoidable link ambiguity. GitHub normally redirects renamed repositories, but reproducibility documentation should not depend on that behavior while the manuscript is under review.
+The AgriEngineering resubmission manuscript cites the current GitHub URL. **Do not rename this repository during peer review**, because doing so could create avoidable link ambiguity. GitHub normally redirects renamed repositories, but reproducibility documentation should not depend on that behavior while the manuscript is under review.
 
 ## Reviewer-facing acceptance test
 
